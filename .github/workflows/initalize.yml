@@ -42,6 +42,7 @@ env:
    TIMEHELPER_INSTANCE: ${{ github.event.inputs.instance }}
    PENDING_DELETE: ${{ github.event.inputs.pendingDelete }}
    OUTPUT_LOGGING: ${{ github.event.inputs.outputLogging }} 
+   OUTPUT_LOG_NAME: "deployment-log.html"  
 
 jobs:
   job1:
