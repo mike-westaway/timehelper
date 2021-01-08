@@ -9,7 +9,7 @@ echo "TIMEHELPER_ALIAS: $TIMEHELPER_ALIAS"
 echo "TIMEHELPER_LOCATION: $TIMEHELPER_LOCATION"
 echo "DB_ADMIN_USER: $DB_ADMIN_USER"
 echo "DB_ADMIN_PASSWORD: $DB_ADMIN_PASSWORD" 
-
+az config set extension.use_dynamic_install=yes_without_prompt
 echo
 # set local variables
 appservice_webapp_sku="S1 Standard"
