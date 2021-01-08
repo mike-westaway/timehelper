@@ -1,0 +1,107 @@
+{
+  "Events": [
+    {
+      "Subject": "Test Event",
+      "Sensitivity": "normal",
+      "ShowAs": "busy",
+      "StartTime": "04/12/2020 14:27:00",
+      "EndTime": "04/12/2020 16:28:00",
+      "Categories": [],
+      "DurationInMinutes": 121.0,
+      "Project" :  "DummyProject"
+    },
+    {
+      "Subject": "Test Event #1",
+      "Sensitivity": "normal",
+      "ShowAs": "busy",
+      "StartTime": "01/12/2020 12:30:00",
+      "EndTime": "01/12/2020 13:00:00",
+      "Categories": [ "test" ],
+      "DurationInMinutes": 30.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "Initial Meeting",
+      "Sensitivity": "private",
+      "ShowAs": "workingElsewhere",
+      "StartTime": "26/11/2020 18:00:00",
+      "EndTime": "26/11/2020 18:30:00",
+      "Categories": [ "Orange category", "Blue category" ],
+      "DurationInMinutes": 30.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "City Centre Waterfront cottage with Parking check out",
+      "Sensitivity": "private",
+      "ShowAs": "free",
+      "StartTime": "18/10/2020 00:00:00",
+      "EndTime": "19/10/2020 00:00:00",
+      "Categories": [],
+      "DurationInMinutes": 1440.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "Innkeeper's Lodge Castleton, Peak District check out",
+      "Sensitivity": "private",
+      "ShowAs": "free",
+      "StartTime": "21/03/2021 00:00:00",
+      "EndTime": "22/03/2021 00:00:00",
+      "Categories": [],
+      "DurationInMinutes": 1440.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "Innkeeper's Lodge Castleton, Peak District check in",
+      "Sensitivity": "private",
+      "ShowAs": "free",
+      "StartTime": "19/03/2021 00:00:00",
+      "EndTime": "20/03/2021 00:00:00",
+      "Categories": [],
+      "DurationInMinutes": 1440.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "The Moon Inn at Stoney Middleton check out",
+      "Sensitivity": "private",
+      "ShowAs": "free",
+      "StartTime": "13/09/2020 00:00:00",
+      "EndTime": "14/09/2020 00:00:00",
+      "Categories": [],
+      "DurationInMinutes": 1440.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "The Moon Inn at Stoney Middleton check in",
+      "Sensitivity": "private",
+      "ShowAs": "free",
+      "StartTime": "11/09/2020 00:00:00",
+      "EndTime": "12/09/2020 00:00:00",
+      "Categories": [ "test" ],
+      "DurationInMinutes": 1440.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "Bolton Arms check out",
+      "Sensitivity": "private",
+      "ShowAs": "free",
+      "StartTime": "09/08/2020 00:00:00",
+      "EndTime": "10/08/2020 00:00:00",
+      "Categories": [],
+      "DurationInMinutes": 1440.0,
+      "Project": "DummyProject"
+    },
+    {
+      "Subject": "Bolton Arms check in",
+      "Sensitivity": "private",
+      "ShowAs": "free",
+      "StartTime": "08/08/2020 00:00:00",
+      "EndTime": "09/08/2020 00:00:00",
+      "Categories": [],
+      "DurationInMinutes": 1440.0,
+      "Project": "DummyProject"
+    }
+  ],
+  "Take": 10,
+  "Skip": 0,
+  "NextSkip": 10
+}

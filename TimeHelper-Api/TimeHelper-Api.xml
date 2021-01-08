@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TimeHelper-Api</name>
+    </assembly>
+    <members>
+        <member name="M:TimeHelper.Api.Controllers.CalendarController.CalendarSimple(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+             <summary>
+             Get a very lightweight list of calendar items for the authenticated user
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 GET /api/Calendar/simple
+                 {
+                 }
+             <param name="skip">optional parameter.  how many events to skip when server side paging</param>
+             <param name="take">optional parameter.  how many events to return when server side paging</param>
+             <returns>A json list of calendar events</returns>
+             <response code="200">Success</response>
+             <response code="204">No event content was found</response> 
+             </remarks>        
+        </member>
+    </members>
+</doc>

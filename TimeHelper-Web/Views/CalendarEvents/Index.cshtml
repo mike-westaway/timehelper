@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TimeHelper.Shared.Models.Value>
+
+@{
+    ViewData["Title"] = "Calendar Events";
+}
+
+<h2>My Calendar Events</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.responseStatus.response)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bodyPreview)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.start.dateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.start.timeZone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.categories)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (TimeHelper.Shared.Models.Value item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.responseStatus.response)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bodyPreview)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.start.dateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.start.timeZone)
+                </td>
+                <td>
+                    <table>
+                        <tbody>
+                            @foreach (var category in item.categories)
+                            {
+                            <tr>
+                                
+                                <td>@category</td>
+
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
