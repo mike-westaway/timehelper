@@ -43,20 +43,20 @@ az group create -l "$TIMEHELPER_LOCATION" --n "$resourceGroupName" --tags  Herac
 echo "<p>Resource Group: $resourceGroupName</p>" >> $output_blob
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
-
-az sql server create -n $dbServerName -g $resourceGroupName -l $TIMEHELPER_LOCATION -u $adminLogin -p $password
 echo "<p>Azure Sql Server: $dbServerName</p>" >> $output_blob
-az sql server firewall-rule create -g $resourceGroupName -s $dbServerName -n AllowAzureServices --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+az sql server create -n $dbServerName -g $resourceGroupName -l $TIMEHELPER_LOCATION -u $DB_ADMIN_USER -p $DB_ADMIN_PASSWORD >> $output_blob
+az sql server firewall-rule create -g $resourceGroupName -s $dbServerName -n AllowAzureServices --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0 >> $output_blob
 echo "<p>Azure Sql Database: $databaseName</p>" >> $output_blob
-az sql db create -g $resourceGroupName -s $dbServerName -n $databaseName --service-objective S0
+az sql db create -g $resourceGroupName -s $dbServerName -n $databaseName --service-objective S0 >> $output_blob
 
 echo "Creating app service $webAppName in group $resourceGroupName"
+echo "<p>App Service (Web App): $webAppName</p>" >> $output_blob
 az  appservice plan create -g $resourceGroupName --name $hostingPlanName --location $TIMEHELPER_LOCATION --number-of-workers 1 --sku S1 --is-linux
 az webapp create \
   --name $webAppName \
   --plan $hostingPlanName \
   --resource-group $resourceGroupName >> $output_blob
-echo "<p>App Service (Web App): $webAppName</p>" >> $output_blob
+
 
 # application insights info
 aIKey=$(az monitor app-insights component show --app $webAppName -g $resourceGroupName --query instrumentationKey -o tsv)
