@@ -62,7 +62,7 @@ jobs:
         id: step3
         run: |
                 chmod +x deployment-scripts/deploy_infrastructure.sh
-                deployment-scripts/deploy_infrastructure_controller.sh
+                deployment-scripts/deploy_infrastructure.sh
   job2:
     name: Update App Settings
     runs-on: ubuntu-latest
