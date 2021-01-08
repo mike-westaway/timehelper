@@ -55,8 +55,8 @@ az  appservice plan create -g $resourceGroupName --name $hostingPlanName --locat
 az webapp create \
   --name $webAppName \
   --plan $hostingPlanName \
-  --resource-group $resourceGroupName >> $output_blob
-
+  --resource-group $resourceGroupName
+  --runtime  "DOTNETCORE|3.1" >> $output_blob
 
 # application insights info
 aIKey=$(az monitor app-insights component show --app $webAppName -g $resourceGroupName --query instrumentationKey -o tsv)
