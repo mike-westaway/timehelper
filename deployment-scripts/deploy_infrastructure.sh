@@ -55,7 +55,7 @@ az  appservice plan create -g $resourceGroupName --name $hostingPlanName --locat
 az webapp create \
   --name $webAppName \
   --plan $hostingPlanName \
-  --resource-group $resourceGroupName
+  --resource-group $resourceGroupName \
   --runtime  "DOTNETCORE|3.1" >> $output_blob
 
 # application insights info
