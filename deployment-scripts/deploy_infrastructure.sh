@@ -47,7 +47,7 @@ echo "<p>Azure Sql Server: $dbServerName</p>" >> $output_blob
 az sql server create -n $dbServerName -g $resourceGroupName -l $TIMEHELPER_LOCATION -u $DB_ADMIN_USER -p $DB_ADMIN_PASSWORD >> $output_blob
 az sql server firewall-rule create -g $resourceGroupName -s $dbServerName -n AllowAzureServices --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0 >> $output_blob
 echo "<p>Azure Sql Database: $databaseName</p>" >> $output_blob
-az sql db create -g $resourceGroupName -s $dbServerName -n $databaseName --service-objective S0 >> $output_blob
+az sql db create -g $resourceGroupName -s $dbServerName -n $dbName --service-objective S0 >> $output_blob
 
 echo "Creating app service $webAppName in group $resourceGroupName"
 echo "<p>App Service (Web App): $webAppName</p>" >> $output_blob
