@@ -14,16 +14,24 @@ on:
       instance:
         description: 'Instance Name'     
         required: true
-        default: 'Lucky_Jim'
+        default: 'Lucky_Strike'
       pendingDelete:
         description: 'pending delete?'     
         required: true
         default: 'true'
+      outputLogging:
+        description: 'output logging?'     
+        required: true
+        default: 'false'
+        
 env:
    AAD_CLIENT_ID : ${{ secrets.AAD_CLIENT_ID }}
    AAD_CLIENT_SECRET : ${{ secrets.AAD_CLIENT_SECRET }}  
    AAD_DOMAIN: ${{ secrets.AAD_DOMAIN }}
    AAD_TENANTID: ${{ secrets.AAD_TENANTID }}
+   
+   DB_ADMIN_PASSWORD: ${{ secrets.DB_ADMIN_PASSWORD }}
+   DB_ADMIN_USER: dbadminuser
    
    SWAGGER_CONTACT_URL: https://github.com/nikkh
    SWAGGER_CONTACT_NAME: Nick Hill 
@@ -33,6 +41,7 @@ env:
    TIMEHELPER_LOCATION: ${{ github.event.inputs.location }}
    TIMEHELPER_INSTANCE: ${{ github.event.inputs.instance }}
    PENDING_DELETE: ${{ github.event.inputs.pendingDelete }}
+   OUTPUT_LOGGING: ${{ github.event.inputs.outputLogging }} 
 
 jobs:
   job1:
@@ -78,6 +87,7 @@ jobs:
         workflow: TimeHelper Api Deployment
         token: ${{ secrets.PAT }}
         inputs: '{ "TIMEHELPER_ALIAS": "${{ env.TIMEHELPER_ALIAS }}" }'
+  
   job4:
     name: Site Deployment
     runs-on: ubuntu-latest
