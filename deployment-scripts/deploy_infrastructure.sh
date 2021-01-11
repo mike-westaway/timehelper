@@ -41,7 +41,7 @@ echo "time helper base url: $timehelperApiBaseUrl"
 echo
 
 echo "Creating resource group $resourceGroupName in $TIMEHELPER_LOCATION"
-az group create -l "$TIMEHELPER_LOCATION" --n "$resourceGroupName" --tags  HeraclesInstance=$TIMEHELPER_INSTANCE Application=TimeHelper MicrososerviceName=timerhelper-web MicroserviceID=$applicationName PendingDelete=$PENDING_DELETE >> $output_blob
+az group create -l "$TIMEHELPER_LOCATION" --n "$resourceGroupName" --tags  TimeHelperInstance=$TIMEHELPER_INSTANCE Application=TimeHelper MicroserviceID=$applicationName PendingDelete=$PENDING_DELETE >> $output_blob
 echo "<p>Resource Group: $resourceGroupName</p>" >> $output_blob
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
