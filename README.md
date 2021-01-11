@@ -34,8 +34,10 @@ Once you have completed your AAD configuration, then we need to store some param
 
 The secrets that need to be configured are described in the following sections:
 
-### AAD_CLIENT_ID
-### AAD_CLIENT_SECRET
+### AAD_WEB_CLIENT_ID
+### AAD_WEB_CLIENT_SECRET
+### AAD_API_CLIENT_ID
+### AAD_API_CLIENT_SECRET
 ### AAD_DOMAIN
 ### AAD_TENANTID
 ### AZURE_CREDENTIALS
