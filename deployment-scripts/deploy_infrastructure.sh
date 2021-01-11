@@ -59,6 +59,10 @@ az webapp create \
   --runtime  "DOTNETCORE|3.1" >> $output_blob
 
 # application insights info
+echo "Creating app insights component $webAppName in group $resourceGroupName"
+echo "<p>Application Insights: $webAppName</p>" >> $output_blob
+az monitor app-insights component create --app $webAppName --location $TIMEHELPER_LOCATION --kind web -g--application-type web >> $output_blob
+echo "</p>" >> $output_blob
 aIKey=$(az monitor app-insights component show --app $webAppName -g $resourceGroupName --query instrumentationKey -o tsv)
 # Attempt to get App Insights configured without the need for the portal
 APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=$aIKey;"
