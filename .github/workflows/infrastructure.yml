@@ -21,8 +21,10 @@ on:
         default: 'true'
        
 env:
-   AAD_CLIENTID : ${{ secrets.AAD_CLIENT_ID }}
-   AAD_CLIENTSECRET : ${{ secrets.AAD_CLIENT_SECRET }}  
+   AAD_APICLIENTID : ${{ secrets.AAD_API_CLIENT_ID }}
+   AAD_APICLIENTSECRET : ${{ secrets.AAD_API_CLIENT_SECRET }}  
+   AAD_WEBCLIENTID : ${{ secrets.AAD_WEB_CLIENT_ID }}
+   AAD_WEBCLIENTSECRET : ${{ secrets.AAD_WEB_CLIENT_SECRET }}
    AAD_DOMAIN: ${{ secrets.AAD_DOMAIN }}
    AAD_TENANTID: ${{ secrets.AAD_TENANTID }}
    
