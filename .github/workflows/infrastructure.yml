@@ -1,4 +1,4 @@
-name: Initialize Time Helper
+name: Build Time Helper Infrastructure
 
 on: 
   workflow_dispatch:
