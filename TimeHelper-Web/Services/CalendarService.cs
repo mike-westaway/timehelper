@@ -39,8 +39,8 @@ namespace TimeHelper.Web.Services
             _httpClient = httpClient;
             _tokenAcquisition = tokenAcquisition;
             _contextAccessor = contextAccessor;
-            _TimeHelperApiScope = configuration["Api:TimeHelper-Api-Scope"];
-            _TimeHelperApiBaseAddress = configuration["Api:TimeHelper-Api-BaseAddress"];
+            _TimeHelperApiScope = configuration["Api:TimeHelperApiScope"];
+            _TimeHelperApiBaseAddress = configuration["Api:TimeHelperApiBaseAddress"];
         }
 
         public async Task<CalendarEventResponse> GetAsync()

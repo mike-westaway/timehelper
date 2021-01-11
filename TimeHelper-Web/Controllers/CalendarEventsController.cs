@@ -22,7 +22,7 @@ namespace TimeHelper.Web.Controllers
         }
 
         // GET: TodoList
-        [AuthorizeForScopes(ScopeKeySection = "Api:TimeHelper-Api-Scope")]
+        [AuthorizeForScopes(ScopeKeySection = "Api:TimeHelperApiScope")]
         public async Task<ActionResult> Index()
         {
          
@@ -32,7 +32,7 @@ namespace TimeHelper.Web.Controllers
 
 
 
-        [AuthorizeForScopes(ScopeKeySection = "Api:TimeHelper-Api-Scope")]
+        [AuthorizeForScopes(ScopeKeySection = "Api:TimeHelperApiScope")]
         [Route("api/[controller]/simple")]
         public async Task<ActionResult> Simple(int? skip, int? take)
         {
@@ -40,7 +40,7 @@ namespace TimeHelper.Web.Controllers
             return View("Simple", response);
         }
 
-        [AuthorizeForScopes(ScopeKeySection = "Api:TimeHelper-Api-Scope")]
+        [AuthorizeForScopes(ScopeKeySection = "Api:TimeHelperApiScope")]
         [Route("api/[controller]/relevant")]
         public async Task<ActionResult> Relevant(int? skip, int? take)
         {

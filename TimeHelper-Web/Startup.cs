@@ -45,7 +45,7 @@ namespace TimeHelper.Web
             services.AddOptions();
             
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
-                    .EnableTokenAcquisitionToCallDownstreamApi(new string[] { Configuration["Api:TimeHelper-Api-Default-Scope"] })
+                    .EnableTokenAcquisitionToCallDownstreamApi(new string[] { Configuration["Api:TimeHelperApiDefaultScope"] })
                     .AddInMemoryTokenCaches();
 
             // Add APIs
