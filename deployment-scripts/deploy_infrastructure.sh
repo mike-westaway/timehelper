@@ -66,7 +66,9 @@ az storage container create -n $dummyDataBlobContainerName --connection-string $
 dummyDataBlobContainer=$(az storage account show -n $storageAccountName --query primaryEndpoints.blob -o tsv)$dummyDataBlobContainerName
 dummyDataSasToken=$(az storage container generate-sas -n $dummyDataBlobContainerName --connection-string $storageAccountConnectionString --expiry $expiry --permissions acdlrw -o tsv)
 dummyDataContainerSasUri="$dummyDataBlobContainer$quickstartContainer?$dummyDataSasToken"
+echo "dummyDataContainerSasUri=$dummyDataContainerSasUri"
 ls
+azcopy
 azcopy copy 'keith2@nikkh.net.dummy.json' $dummyDataContainerSasUri --recursive=false --from-to LocalBlob
 echo "dummyDataBlobContainer=$dummyDataBlobContainer"
 
@@ -79,8 +81,6 @@ az sql db create -g $resourceGroupName -s $dbServerName -n $dbName --service-obj
 baseDbConnectionString=$(az sql db show-connection-string -c ado.net -s $dbServerName -n $dbName -o tsv)
 dbConnectionStringWithUser="${baseDbConnectionString/<username>/$DB_ADMIN_USER}"
 sqlConnectionString="${dbConnectionStringWithUser/<password>/$DB_ADMIN_PASSWORD}"
-
-
 
 echo "Creating app service hosting plan $apiAppName in group $resourceGroupName"
 echo "<p>Hosting Plan: $hostingPlanName</p>" >> $output_blob
