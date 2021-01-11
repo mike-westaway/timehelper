@@ -38,7 +38,7 @@ resourceGroupName="${applicationName}-rg"
 timehelperApiBaseUrl="https://${applicationName}-api.azurewebsites.net/"
 timehelperApiDefaultScope="${TIMEHELPER_API_SCOPE}.default"
 timehelperApiScope="${TIMEHELPER_API_SCOPE}access_as_user"
-swaggerTermsUri="${webAppName}.azurewebsites.net/Home/Terms"
+swaggerTermsUri="https://${webAppName}.azurewebsites.net/Home/Terms"
 echo ---Derived Variables
 echo "Application Name: $applicationName"
 echo "Resource Group Name: $resourceGroupName"
@@ -71,6 +71,7 @@ az storage container create -n "logs" --public-access off >> $output_blob
 az storage container create -n $dummyDataContainerName --public-access off >> $output_blob
 az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n 'keith2@nikkh.net.dummy.json' >> $output_blob
 echo "Uploaded 'keith2@nikkh.net.dummy.json' to container $dummyDataContainerName in storage account $storageAccountName"
+dummyDataContainer="$(az storage account show -n $storageAccountName -g $resourceGroupName  --query primaryEndpoints.blob -o tsv)$dummyDataContainerName"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
 echo "<h1>Azure Sql Server: $dbServerName</h1>" >> $output_blob
