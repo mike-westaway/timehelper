@@ -64,19 +64,8 @@ jobs:
         run: |
                 chmod +x deployment-scripts/deploy_infrastructure.sh
                 deployment-scripts/deploy_infrastructure.sh
+           
   job2:
-    name: Update App Settings
-    runs-on: ubuntu-latest
-    needs: [job1]
-    steps:
-    - uses: actions/checkout@v2
-    - id: step1
-      name: Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-  job3:
     name: Api Deployment
     runs-on: ubuntu-latest
     needs: [job1]
@@ -89,7 +78,7 @@ jobs:
         token: ${{ secrets.PAT }}
         inputs: '{ "TIMEHELPER_ALIAS": "${{ env.TIMEHELPER_ALIAS }}" }'
   
-  job4:
+  job3:
     name: Site Deployment
     runs-on: ubuntu-latest
     needs: [job1]
