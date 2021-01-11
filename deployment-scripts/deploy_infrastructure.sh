@@ -2,7 +2,7 @@
 output_blob=$OUTPUT_LOG_NAME
 echo '<!DOCTYPE html><html><head> </head><body>' >> $output_blob
 echo '<h1>Deployment Log</h1>' >> $output_blob
-resourcesLink="https://portal.azure.com/#blade/HubsExtension/BrowseResourcesWithTag/tagName/HeraclesInstance/tagValue/$TIMEHELPER_INSTANCE"
+resourcesLink="https://portal.azure.com/#blade/HubsExtension/BrowseResourcesWithTag/tagName/TimeHelperInstance/tagValue/$TIMEHELPER_INSTANCE"
 echo '<a href="'$resourcesLink'">Click here to access your TimeHelper resources in Azure</a>' >> $output_blob
 echo '<p></p>' >>$output_blob
 echo "<h2>TimeHelper Web Site</h2>" >> $output_blob
@@ -55,7 +55,6 @@ echo "swagger terms uri: $swaggerTermsUri"
 echo "SWAGGER_CONTACT_URL: $SWAGGER_CONTACT_URL"
 echo "SWAGGER_CONTACT_NAME: $SWAGGER_CONTACT_NAME"
 echo "SWAGGER_CONTACT_EMAIL: $SWAGGER_CONTACT_EMAIL"
-echo
 
 echo "Creating resource group $resourceGroupName in $TIMEHELPER_LOCATION"
 az group create -l "$TIMEHELPER_LOCATION" --n "$resourceGroupName" --tags  TimeHelperInstance=$TIMEHELPER_INSTANCE Application=TimeHelper MicroserviceID=$applicationName PendingDelete=$PENDING_DELETE >> $output_blob
@@ -64,18 +63,16 @@ echo "<p>Resource Group: $resourceGroupName</p>" >> $output_blob
 echo "Creating storage account $storageAccountName in $TIMEHELPER_LOCATION"
 echo "<p>Storage Account: $storageAccountName</p>"
 
-az storage account create  --name $storageAccountName  --location $TIMEHELPER_LOCATION  --resource-group $resourceGroupName  --sku Standard_LRS
+az storage account create  --name $storageAccountName  --location $TIMEHELPER_LOCATION  --resource-group $resourceGroupName  --sku Standard_LRS >> $output_blob
 storageConnectionString=$(az storage account show-connection-string -n $storageAccountName -g $resourceGroupName --query connectionString -o tsv)
-echo "storageConnectionString=$storageConnectionString"
-export AZURE_STORAGE_CONNECTION_STRING="$storageConnectionString"
-echo "AZURE_STORAGE_CONNECTION_STRING=$AZURE_STORAGE_CONNECTION_STRING"
+echo "storageConnectionString=$storageConnectionString" >> $output_blob
+export AZURE_STORAGE_CONNECTION_STRING="$storageConnectionString" 
+echo "AZURE_STORAGE_CONNECTION_STRING=$AZURE_STORAGE_CONNECTION_STRING" >> $output_blob
 dummyDataContainerName='timehelper-dummy-data'
 echo "dummyDataContainerName=$dummyDataContainerName"
-expiry=$(date --date="1 month" +%F)
-echo "expiry=$expiry"
-az storage container create -n $dummyDataContainerName --public-access off 
-az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n 'keith2@nikkh.net.dummy.json'
-echo "Uploaded './keith2@nikkh.net.dummy.json' to container $dummyDataContainerName in storage account $storageAccountName"
+az storage container create -n $dummyDataContainerName --public-access off >> $output_blob
+az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n 'keith2@nikkh.net.dummy.json' >> $output_blob
+echo "Uploaded 'keith2@nikkh.net.dummy.json' to container $dummyDataContainerName in storage account $storageAccountName"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
 echo "<p>Azure Sql Server: $dbServerName</p>" >> $output_blob
@@ -135,25 +132,9 @@ az webapp create \
   --plan $hostingPlanName \
   --resource-group $resourceGroupName \
   --runtime  "DOTNETCORE|3.1" >> $output_blob
-  
-echo "Updating App Settings for api $apiAppName"
-echo "<p>Web App Settings:" >> $output_blob
-echo "AzureAD__Domain=$AAD_DOMAIN"
-echo "AzureAD__TenantId=$AAD_TENANTID"
-echo "AzureAD__ClientId=$AAD_CLIENTID"
-echo "AzureAD__ClientSecret=$AAD_CLIENTSECRET"
-echo "APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING"
-echo "APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY"
-echo "ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION"
-echo "ContactUri=$SWAGGER_CONTACT_URL"
-echo "ContactName=$SWAGGER_CONTACT_NAME"
-echo "ContactEmail=$SWAGGER_CONTACT_EMAIL"
-echo "TermsUri=$swaggerTermsUri"
-echo "DummyDataBlobContainer=$dummyDataBlobContainer"
-
-
+echo "<p>we need to change the --runtime option to node or similar</p>"
 az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION ContactUri=$SWAGGER_CONTACT_URL "ContactName=$SWAGGER_CONTACT_NAME" "ContactEmail=$SWAGGER_CONTACT_EMAIL" TermsUri=$swaggerTermsUri DummyDataBlobContainer=$dummyDataBlobContainer >> output_blob
-az webapp config connection-string set -g $resourceGroupName -n $apiAppName -t SQLAzure --settings "TimeHelperDataContext=$sqlConnectionString"
+az webapp config connection-string set -g $resourceGroupName -n $apiAppName -t SQLAzure --settings "TimeHelperDataContext=$sqlConnectionString" >> output_blob
 echo "</p>" >> $output_blob
 
 echo '</body></html>' >> $output_blob
@@ -161,15 +142,4 @@ echo '</body></html>' >> $output_blob
 # Upload the deployment log to the zodiac storage account 
 az storage container create -n "logs" --public-access off
 az storage blob upload -c "logs" -f $output_blob -n$output_blob
-echo "Uploaded $output_blob to storage account $storageAccountName"
-
-# Generate a SAS Token for direct access to the deployment log
-today=$(date +%F)T
-tomorrow=$(date --date="1 day" +%F)T
-startTime=$(date --date="-2 hour" +%T)Z
-expiryTime=$(date --date="2 hour" +%T)Z
-start="$today$startTime"
-expiry="$tomorrow$expiryTime"
-url=$(az storage blob url -c "logs" -n $output_blob -o tsv)
-sas=$(az storage blob generate-sas -c "logs" -n $output_blob --permissions r -o tsv --expiry $expiry --https-only --start $start)
-echo "link to deployment-log is $url?$sas"
+echo "Uploaded $output_blob to logs container in storage account $storageAccountName"
