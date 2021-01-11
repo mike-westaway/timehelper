@@ -1,5 +1,10 @@
 #!/bin/bash -e
 output_blob=$OUTPUT_LOG_NAME
+echo '<!DOCTYPE html><html><head> </head><body>' >> $output_blob
+echo '<h1>Deployment Log</h1>' >> $output_blob
+resourcesLink="https://portal.azure.com/#blade/HubsExtension/BrowseResourcesWithTag/tagName/HeraclesInstance/tagValue/$TIMEHELPER_INSTANCE"
+echo '<a href="'$resourcesLink'">Click here to access your TimeHelper resources in Azure</a>' >> $output_blob
+echo '<p></p>' >>$output_blob
 echo "<h2>TimeHelper Web Site</h2>" >> $output_blob
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo    Deploying Time Helper Infrastructure
@@ -59,16 +64,15 @@ echo "<p>Resource Group: $resourceGroupName</p>" >> $output_blob
 echo "Creating storage account $storageAccountName in $TIMEHELPER_LOCATION"
 az storage account create  --name $storageAccountName  --location $TIMEHELPER_LOCATION  --resource-group $resourceGroupName  --sku Standard_LRS >> $output_blob
 storageAccountConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $storageAccountName -o tsv)
+storageConnectionString=$(az storage account show-connection-string -n $storageAccountName -g $resourceGroupName --query connectionString -o tsv)
+export AZURE_STORAGE_CONNECTION_STRING="$storageConnectionString"
 echo "<p>Storage Account: $storageAccountName</p>" >> $output_blob
-dummyDataBlobContainerName='timehelper-dummy-data'
+
+dummyDataContainerName='timehelper-dummy-data'
 expiry=$(date --date="1 month" +%F)
-az storage container create -n $dummyDataBlobContainerName --connection-string $storageAccountConnectionString >> $output_blob
-dummyDataBlobContainer=$(az storage account show -n $storageAccountName --query primaryEndpoints.blob -o tsv)$dummyDataBlobContainerName
-dummyDataSasToken=$(az storage container generate-sas -n $dummyDataBlobContainerName --connection-string $storageAccountConnectionString --expiry $expiry --permissions acdlrw -o tsv)
-dummyDataContainerSasUri="$dummyDataBlobContainer$quickstartContainer?$dummyDataSasToken"
-echo "dummyDataContainerSasUri=$dummyDataContainerSasUri"
-azcopy copy --source './keith2@nikkh.net.dummy.json' --destination "$dummyDataContainerSasUri" # --from-to LocalBlob
-echo "dummyDataBlobContainer=$dummyDataBlobContainer"
+az storage container create -n $dummyDataContainerName --public-access off>> $output_blob
+az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n './keith2@nikkh.net.dummy.json'
+echo "Uploaded './keith2@nikkh.net.dummy.json' to container $dummyDataContainerName in storage account $storageAccountName"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
 echo "<p>Azure Sql Server: $dbServerName</p>" >> $output_blob
@@ -149,9 +153,20 @@ az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings
 az webapp config connection-string set -g $resourceGroupName -n $apiAppName -t SQLAzure --settings "TimeHelperDataContext=$sqlConnectionString"
 echo "</p>" >> $output_blob
 
-echo "xxxxxOUTPUT_LOGGING=$OUTPUT_LOGGING"
-if [ "$OUTPUT_LOGGING" = TRUE ]; then
- cat $output_blob
-else
- cat $output_blob
-fi
+echo '</body></html>' >> $output_blob
+
+# Upload the deployment log to the zodiac storage account 
+az storage container create -n "logs" --public-access off
+az storage blob upload -c "logs" -f $output_blob -n$output_blob
+echo "Uploaded $output_blob to storage account $storageAccountName"
+
+# Generate a SAS Token for direct access to the deployment log
+today=$(date +%F)T
+tomorrow=$(date --date="1 day" +%F)T
+startTime=$(date --date="-2 hour" +%T)Z
+expiryTime=$(date --date="2 hour" +%T)Z
+start="$today$startTime"
+expiry="$tomorrow$expiryTime"
+url=$(az storage blob url -c "logs" -n $output_blob -o tsv)
+sas=$(az storage blob generate-sas -c "logs" -n $output_blob --permissions r -o tsv --expiry $expiry --https-only --start $start)
+echo "link to deployment-log is $url?$sas"
