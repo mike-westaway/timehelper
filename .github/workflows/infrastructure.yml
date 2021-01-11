@@ -76,7 +76,7 @@ jobs:
       with:
         workflow: TimeHelper Api Deployment
         token: ${{ secrets.PAT }}
-        inputs: '{ "TIMEHELPER_ALIAS": "${{ env.TIMEHELPER_ALIAS }}" }'
+        inputs: '{ "timehelper_alias": "${{ env.TIMEHELPER_ALIAS }}" }'  
   
   job3:
     name: Site Deployment
@@ -89,5 +89,5 @@ jobs:
       with:
         workflow: TimeHelper Web Site Deployment
         token: ${{ secrets.PAT }}
-        inputs: '{ "TIMEHELPER_ALIAS": "${{ env.TIMEHELPER_ALIAS }}" }'  
+        inputs: '{ "timehelper_alias": "${{ env.TIMEHELPER_ALIAS }}" }'  
   
