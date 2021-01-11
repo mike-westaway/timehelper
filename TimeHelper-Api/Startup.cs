@@ -104,7 +104,7 @@ namespace TimeHelper.Api
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "GKS Time Assistant API V1.0");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Time Helper API V1.0");
                 c.RoutePrefix = string.Empty;
             });
             app.UseRouting();
