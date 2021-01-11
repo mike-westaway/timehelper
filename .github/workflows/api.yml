@@ -5,10 +5,6 @@ on:
       timehelper_alias:
         description: 'TimeHelper Alias'     
         required: true
-  push:
-      branches: [ main ]
-      paths:
-        - 'TimeHelper-Api/**'
   
 env:
    TIMEHELPER_ALIAS: ${{ github.event.inputs.timehelper_alias }}  
