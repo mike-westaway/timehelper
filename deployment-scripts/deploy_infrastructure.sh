@@ -1,6 +1,6 @@
 #!/bin/bash -e
 output_blob=$OUTPUT_LOG_NAME
-echo "<h2>TimeHelper WebSite</h2>" >> $output_blob
+echo "<h2>TimeHelper Web Site</h2>" >> $output_blob
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo         Deploying Time Helper Web
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -21,6 +21,7 @@ echo
 # Derive as many variables as possible
 applicationName="${TIMEHELPER_ALIAS}"
 webAppName="${applicationName}-web"
+apiAppName="${applicationName}-api"
 hostingPlanName="${applicationName}-plan"
 dbServerName="${applicationName}-db-server"
 dbName="${applicationName}-db"
@@ -32,6 +33,7 @@ echo ---Derived Variables
 echo "Application Name: $applicationName"
 echo "Resource Group Name: $resourceGroupName"
 echo "Web App Name: $webAppName"
+echo "Api App Name: $apiAppName"
 echo "Hosting Plan: $hostingPlanName"
 echo "DB Server Name: $dbServerName"
 echo "DB Name: $dbName"
@@ -49,32 +51,47 @@ az sql server firewall-rule create -g $resourceGroupName -s $dbServerName -n All
 echo "<p>Azure Sql Database: $databaseName</p>" >> $output_blob
 az sql db create -g $resourceGroupName -s $dbServerName -n $dbName --service-objective S0 >> $output_blob
 
-echo "Creating app service $webAppName in group $resourceGroupName"
-echo "<p>App Service (Web App): $webAppName</p>" >> $output_blob
+echo "Creating app service hosting plant $apiAppName in group $resourceGroupName"
+echo "<p>Hosting Plan: $hostingPlanName</p>" >> $output_blob
 az  appservice plan create -g $resourceGroupName --name $hostingPlanName --location $TIMEHELPER_LOCATION --number-of-workers 1 --sku S1 --is-linux >> $output_blob
+
+echo "Creating app insights component $webAppName in group $resourceGroupName"
+echo "<p>Application Insights: $webAppName</p>" >> $output_blob
+az monitor app-insights component create --app $webAppName --location $TIMEHELPER_LOCATION --kind web -g $resourceGroupName --application-type web >> $output_blob
+aIKey=$(az monitor app-insights component show --app $webAppName -g $resourceGroupName --query instrumentationKey -o tsv)
+echo "Application Insights Key: $aiKey"
+APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=$aIKey;"
+APPINSIGHTS_INSTRUMENTATIONKEY=$aIKey
+ApplicationInsightsAgent_EXTENSION_VERSION='~2'
+
+echo "Creating app service for web site $webAppName in group $resourceGroupName"
+echo "<p>App Service (Web App): $webAppName</p>" >> $output_blob
+
 az webapp create \
   --name $webAppName \
   --plan $hostingPlanName \
   --resource-group $resourceGroupName \
   --runtime  "DOTNETCORE|3.1" >> $output_blob
 
-# application insights info
-echo "Creating app insights component $webAppName in group $resourceGroupName"
-echo "<p>Application Insights: $webAppName</p>" >> $output_blob
-az monitor app-insights component create --app $webAppName --location $TIMEHELPER_LOCATION --kind web -g $resourceGroupName --application-type web >> $output_blob
-aIKey=$(az monitor app-insights component show --app $webAppName -g $resourceGroupName --query instrumentationKey -o tsv)
-echo "Application Insights Key: $aiKey"
-echo "</p>" >> $output_blob
-
-# Attempt to get App Insights configured without the need for the portal
-APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=$aIKey;"
-APPINSIGHTS_INSTRUMENTATIONKEY=$aIKey
-ApplicationInsightsAgent_EXTENSION_VERSION='~2'
-
-echo "Updating App Settings for $webAppName"
+echo "Updating App Settings for web site $webAppName"
 echo "<p>Web App Settings:" >> $output_blob
 az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION 
 echo "</p>" >> $output_blob
+
+
+echo "<p>App Service (Api App): $apiAppName</p>" >> $output_blob
+
+az webapp create \
+  --name $apiAppName \
+  --plan $hostingPlanName \
+  --resource-group $resourceGroupName \
+  --runtime  "DOTNETCORE|3.1" >> $output_blob
+  
+echo "Updating App Settings for api $apiAppName"
+echo "<p>Web App Settings:" >> $output_blob
+az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION 
+echo "</p>" >> $output_blob
+
 if [ "$OUTPUT_LOGGING" = TRUE ]; then
  cat $output_blob
 fi
