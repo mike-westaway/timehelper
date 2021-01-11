@@ -69,7 +69,7 @@ dummyDataContainerSasUri="$dummyDataBlobContainer$quickstartContainer?$dummyData
 echo "dummyDataContainerSasUri=$dummyDataContainerSasUri"
 ls
 azcopy
-azcopy copy 'keith2@nikkh.net.dummy.json' $dummyDataContainerSasUri --recursive=false --from-to LocalBlob
+azcopy copy 'keith2@nikkh.net.dummy.json' $dummyDataContainerSasUri --from-to LocalBlob
 echo "dummyDataBlobContainer=$dummyDataBlobContainer"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
