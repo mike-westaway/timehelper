@@ -145,7 +145,7 @@ echo "TermsUri=$swaggerTermsUri"
 echo "DummyDataBlobContainer=$dummyDataBlobContainer"
 
 
-az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION ContactUri=$SWAGGER_CONTACT_URL ContactName=$SWAGGER_CONTACT_NAME ContactEmail=$SWAGGER_CONTACT_EMAIL TermsUri=$swaggerTermsUri DummyDataBlobContainer=$dummyDataBlobContainer >> output_blob
+az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION ContactUri=$SWAGGER_CONTACT_URL "ContactName=$SWAGGER_CONTACT_NAME" "ContactEmail=$SWAGGER_CONTACT_EMAIL" TermsUri=$swaggerTermsUri DummyDataBlobContainer=$dummyDataBlobContainer >> output_blob
 az webapp config connection-string set -g $resourceGroupName -n $apiAppName -t SQLAzure --settings TimeHelperDataContext=$sqlConnectionString
 echo "</p>" >> $output_blob
 
