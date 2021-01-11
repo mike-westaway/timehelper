@@ -19,11 +19,7 @@ on:
         description: 'pending delete?'     
         required: true
         default: 'true'
-      outputLogging:
-        description: 'output logging?'     
-        required: true
-        default: 'false'
-        
+       
 env:
    AAD_CLIENTID : ${{ secrets.AAD_CLIENT_ID }}
    AAD_CLIENTSECRET : ${{ secrets.AAD_CLIENT_SECRET }}  
@@ -31,6 +27,7 @@ env:
    AAD_TENANTID: ${{ secrets.AAD_TENANTID }}
    
    DB_ADMIN_PASSWORD: ${{ secrets.DB_ADMIN_PASSWORD }}
+   TIMEHELPER_API_SCOPE: ${{ secrets.TIMEHELPER_API_SCOPE }} 
    DB_ADMIN_USER: dbadminuser
    
    SWAGGER_CONTACT_URL: https://github.com/nikkh
@@ -41,7 +38,6 @@ env:
    TIMEHELPER_LOCATION: ${{ github.event.inputs.location }}
    TIMEHELPER_INSTANCE: ${{ github.event.inputs.instance }}
    PENDING_DELETE: ${{ github.event.inputs.pendingDelete }}
-   OUTPUT_LOGGING: ${{ github.event.inputs.outputLogging }} 
    OUTPUT_LOG_NAME: "deployment-log.html"  
 
 jobs:
