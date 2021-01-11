@@ -87,7 +87,7 @@ baseDbConnectionString=$(az sql db show-connection-string -c ado.net -s $dbServe
 dbConnectionStringWithUser="${baseDbConnectionString/<username>/$DB_ADMIN_USER}"
 sqlConnectionString="${dbConnectionStringWithUser/<password>/$DB_ADMIN_PASSWORD}"
 
-echo "Creating app service hosting plan $apiAppName in group $resourceGroupName"
+echo "Creating app service hosting plan $hostingPlanName in group $resourceGroupName"
 echo "<p>Hosting Plan: $hostingPlanName</p>" >> $output_blob
 az  appservice plan create -g $resourceGroupName --name $hostingPlanName --location $TIMEHELPER_LOCATION --number-of-workers 1 --sku S1 --is-linux >> $output_blob
 
