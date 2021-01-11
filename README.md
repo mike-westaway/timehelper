@@ -14,7 +14,13 @@ Time helper is hosted on Azure, and can be deployed automatically (with a single
 Given the permissions and processes for Azure Active Directory (AAD) configuration many vary significantly acorss organisations, AAD configuration must be completed manually before running the GitHub action that creates the hosting infrastructure and deploys the application components.
 
 ## AAD Configuration
+
 ## Preparing to Deploy
+Once you have completed your AAD configuration, then we need to store some parameters relating to tht set-up in your GitHub account.  Sensitive data will be stored in GitHub secrets to ensure they are kept provate, and are masked in deployment logs, etc.
+
+### Azure Credentials
+
+
 ## Deploying
 ## Testing your Deployment
 
