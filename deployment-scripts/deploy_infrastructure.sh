@@ -67,7 +67,7 @@ dummyDataBlobContainer=$(az storage account show -n $storageAccountName --query 
 dummyDataSasToken=$(az storage container generate-sas -n $dummyDataBlobContainerName --connection-string $storageAccountConnectionString --expiry $expiry --permissions acdlrw -o tsv)
 dummyDataContainerSasUri="$dummyDataBlobContainer$quickstartContainer?$dummyDataSasToken"
 echo "dummyDataContainerSasUri=$dummyDataContainerSasUri"
-#azcopy copy 'keith2@nikkh.net.dummy.json' $dummyDataContainerSasUri --from-to LocalBlob
+azcopy copy --source './keith2@nikkh.net.dummy.json' --destination "$dummyDataContainerSasUri" # --from-to LocalBlob
 echo "dummyDataBlobContainer=$dummyDataBlobContainer"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
@@ -118,7 +118,7 @@ az webapp create \
 
 echo "Updating App Settings for web site $clientAppName"
 echo "<p>Client App Settings:" >> $output_blob
-az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=timehelperApiDefaultScope TimeHelperApiScope=timehelperApiScope >> output_blob
+az webapp config appsettings set -g $resourceGroupName -n $clientAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=timehelperApiDefaultScope TimeHelperApiScope=timehelperApiScope >> output_blob
 echo "</p>" >> $output_blob
 
 echo "<p>App Service (Api App): $apiAppName</p>" >> $output_blob
@@ -146,10 +146,10 @@ echo "DummyDataBlobContainer=$dummyDataBlobContainer"
 
 
 az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION ContactUri=$SWAGGER_CONTACT_URL "ContactName=$SWAGGER_CONTACT_NAME" "ContactEmail=$SWAGGER_CONTACT_EMAIL" TermsUri=$swaggerTermsUri DummyDataBlobContainer=$dummyDataBlobContainer >> output_blob
-az webapp config connection-string set -g $resourceGroupName -n $apiAppName -t SQLAzure --settings TimeHelperDataContext=$sqlConnectionString
+az webapp config connection-string set -g $resourceGroupName -n $apiAppName -t SQLAzure --settings "TimeHelperDataContext=$sqlConnectionString"
 echo "</p>" >> $output_blob
 
-echo "OUTPUT_LOGGING=$OUTPUT_LOGGING"
+echo "xxxxxOUTPUT_LOGGING=$OUTPUT_LOGGING"
 if [ "$OUTPUT_LOGGING" = TRUE ]; then
  cat $output_blob
 else
