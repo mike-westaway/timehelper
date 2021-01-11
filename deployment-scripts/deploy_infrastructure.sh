@@ -62,15 +62,18 @@ az group create -l "$TIMEHELPER_LOCATION" --n "$resourceGroupName" --tags  TimeH
 echo "<p>Resource Group: $resourceGroupName</p>" >> $output_blob
 
 echo "Creating storage account $storageAccountName in $TIMEHELPER_LOCATION"
-az storage account create  --name $storageAccountName  --location $TIMEHELPER_LOCATION  --resource-group $resourceGroupName  --sku Standard_LRS >> $output_blob
-storageAccountConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $storageAccountName -o tsv)
-storageConnectionString=$(az storage account show-connection-string -n $storageAccountName -g $resourceGroupName --query connectionString -o tsv)
-export AZURE_STORAGE_CONNECTION_STRING="$storageConnectionString"
-echo "<p>Storage Account: $storageAccountName</p>" >> $output_blob
+echo "<p>Storage Account: $storageAccountName</p>"
 
+az storage account create  --name $storageAccountName  --location $TIMEHELPER_LOCATION  --resource-group $resourceGroupName  --sku Standard_LRS
+storageConnectionString=$(az storage account show-connection-string -n $storageAccountName -g $resourceGroupName --query connectionString -o tsv)
+echo "storageConnectionString=$storageConnectionString"
+export AZURE_STORAGE_CONNECTION_STRING="$storageConnectionString"
+echo "AZURE_STORAGE_CONNECTION_STRING=$AZURE_STORAGE_CONNECTION_STRING"
 dummyDataContainerName='timehelper-dummy-data'
+echo "dummyDataContainerName=$dummyDataContainerName"
 expiry=$(date --date="1 month" +%F)
-az storage container create -n $dummyDataContainerName --public-access off>> $output_blob
+echo "expiry=$expiry"
+az storage container create -n $dummyDataContainerName --public-access off 
 az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n './keith2@nikkh.net.dummy.json'
 echo "Uploaded './keith2@nikkh.net.dummy.json' to container $dummyDataContainerName in storage account $storageAccountName"
 
