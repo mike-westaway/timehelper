@@ -37,5 +37,5 @@ jobs:
       name: 'Deploy TimeHelper Web to App Service'
       uses: azure/webapps-deploy@v1
       with: 
-        app-name: ${{env.TIMEHELPER_ALIAS}}-api
+        app-name: ${{env.TIMEHELPER_ALIAS}}-web
         package: ${{env.DOTNET_ROOT}}/timehelper-web
