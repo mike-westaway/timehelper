@@ -84,7 +84,7 @@ echo "<p>Sqlq Connection String=$sqlConnectionString</p>" >> $output_blob
 
 echo "Creating app service hosting plan $hostingPlanName in group $resourceGroupName"
 echo "<h1>Hosting Plan: $hostingPlanName</h1>" >> $output_blob
-az  appservice plan create -g $resourceGroupName --name $hostingPlanName --location $TIMEHELPER_LOCATION --number-of-workers 1 --sku S1 --is-linux >> $output_blob
+az appservice plan create -g $resourceGroupName --name $hostingPlanName --location $TIMEHELPER_LOCATION --number-of-workers 1 --sku S1 --is-linux >> $output_blob
 
 echo "Creating app insights component $webAppName in group $resourceGroupName"
 echo "<h1>Application Insights: $webAppName</h1>" >> $output_blob
@@ -105,7 +105,7 @@ az webapp create \
 
 echo "Updating App Settings for web site $webAppName"
 echo "<h2>Web App Settings:</h2>" >> $output_blob
-az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=timehelperApiDefaultScope TimeHelperApiScope=timehelperApiScope >> output_blob
+az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_WEBCLIENTID AzureAD__ClientSecret=$AAD_WEBCLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=timehelperApiDefaultScope TimeHelperApiScope=timehelperApiScope >> output_blob
 
 echo "Creating app service for client application $clientAppName in group $resourceGroupName"
 echo "<h1>App Service (Web App): $clientAppName</h1>" >> $output_blob
@@ -118,7 +118,7 @@ az webapp create \
 
 echo "Updating App Settings for web site $clientAppName"
 echo "<h2>Client App Settings:</h2>" >> $output_blob
-az webapp config appsettings set -g $resourceGroupName -n $clientAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=timehelperApiDefaultScope TimeHelperApiScope=timehelperApiScope >> output_blob
+az webapp config appsettings set -g $resourceGroupName -n $clientAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_WEBCLIENTID AzureAD__ClientSecret=$AAD_WEBCLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=timehelperApiDefaultScope TimeHelperApiScope=timehelperApiScope >> output_blob
 echo "<p>we need to change the --runtime option to node or similar</p>"
 echo '<p></p>' >>$output_blob
 
@@ -133,7 +133,7 @@ az webapp create \
 
 echo "<h2>Api App Settings:</h2>" >> $output_blob
 echo "Updating App Settings for api app $apiAppName"
-az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID AzureAD__ClientSecret=$AAD_CLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION ContactUri=$SWAGGER_CONTACT_URL "ContactName=$SWAGGER_CONTACT_NAME" "ContactEmail=$SWAGGER_CONTACT_EMAIL" TermsUri=$swaggerTermsUri DummyDataBlobContainer=$dummyDataBlobContainer >> output_blob
+az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_APICLIENTID AzureAD__ClientSecret=$AAD_APICLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION ContactUri=$SWAGGER_CONTACT_URL "ContactName=$SWAGGER_CONTACT_NAME" "ContactEmail=$SWAGGER_CONTACT_EMAIL" TermsUri=$swaggerTermsUri DummyDataBlobContainer=$dummyDataBlobContainer >> output_blob
 
 echo "<h2>Api App Connection Strings:</h2>" >> $output_blob
 echo "Updating Connection Strings for api app $apiAppName"
