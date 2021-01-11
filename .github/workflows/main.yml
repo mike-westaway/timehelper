@@ -1,0 +1,40 @@
+name: TimeHelper Api Deployment
+on: 
+  workflow_dispatch:
+    inputs:
+      timehelper_alias:
+        description: 'TimeHelper Alias'     
+        required: true
+env:
+   TIMEHELPER_ALIAS: ${{ github.event.inputs.timehelper_alias }}  
+
+jobs:
+  job1:
+    name: Deploy TimeHelper Api
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - id: step1
+      name: Setup .NET Core 3.1.101
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+
+    - id: step2
+      name: Build TimeHelper Api
+      run: dotnet build TimeHelper-Api/TimeHelper-Api.csproj --configuration Debug
+
+    - id: step3
+      name: Publish TimeHelper Api
+      run: dotnet publish TimeHelper-Api/TimeHelper-Api.csproj -c Debug -o ${{env.DOTNET_ROOT}}/timehelper-api 
+        
+    - id: step4
+      name: 'Deploy TimeHelper Api to App Service'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: ${{env.TIMEHELPER_ALIAS}}-api
+        package: ${{env.DOTNET_ROOT}}/timehelper-api
