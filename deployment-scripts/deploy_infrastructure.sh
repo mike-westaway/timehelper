@@ -74,7 +74,7 @@ echo "dummyDataContainerName=$dummyDataContainerName"
 expiry=$(date --date="1 month" +%F)
 echo "expiry=$expiry"
 az storage container create -n $dummyDataContainerName --public-access off 
-az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n './keith2@nikkh.net.dummy.json'
+az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n 'keith2@nikkh.net.dummy.json'
 echo "Uploaded './keith2@nikkh.net.dummy.json' to container $dummyDataContainerName in storage account $storageAccountName"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
