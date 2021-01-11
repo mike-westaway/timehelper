@@ -67,9 +67,7 @@ dummyDataBlobContainer=$(az storage account show -n $storageAccountName --query 
 dummyDataSasToken=$(az storage container generate-sas -n $dummyDataBlobContainerName --connection-string $storageAccountConnectionString --expiry $expiry --permissions acdlrw -o tsv)
 dummyDataContainerSasUri="$dummyDataBlobContainer$quickstartContainer?$dummyDataSasToken"
 echo "dummyDataContainerSasUri=$dummyDataContainerSasUri"
-ls
-azcopy
-azcopy copy 'keith2@nikkh.net.dummy.json' $dummyDataContainerSasUri --from-to LocalBlob
+#azcopy copy 'keith2@nikkh.net.dummy.json' $dummyDataContainerSasUri --from-to LocalBlob
 echo "dummyDataBlobContainer=$dummyDataBlobContainer"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
