@@ -15,10 +15,34 @@ Given the permissions and processes for Azure Active Directory (AAD) configurati
 
 ## AAD Configuration
 
-## Preparing to Deploy
-Once you have completed your AAD configuration, then we need to store some parameters relating to tht set-up in your GitHub account.  Sensitive data will be stored in GitHub secrets to ensure they are kept provate, and are masked in deployment logs, etc.
+You dont need to be a global administrator to complete this configuration, but you will need to be a member of the Application administrator role.
 
-### Azure Credentials
+AAD configuration should be carried out very carefully.  If you have problems installing and running TimeHelper, it's most likely because of an error configuring AAD.  There are three elements to the AAD configuration required:
+
+- Configure a service principal to allow GitHub actions to create resources in your Azure Subscription
+- Configure an AAD application to represent client applications that will access the api component
+- Configure an AAD application to represent the api component
+
+These elements are described in detail in the following sections:
+
+### Service Principal for GitHub Actions
+### Client AAD Application
+### Api AAD Application
+
+## Preparing to Deploy
+Once you have completed your AAD configuration, then we need to store some parameters relating to tht set-up in your GitHub account.  Sensitive data will be stored in GitHub secrets to ensure they are kept private, and are masked in deployment logs, etc. Please see the [GitHub documentation for more information on managing secrets](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets)
+
+The secrets that need to be configured are described in the following sections:
+
+### AAD_CLIENT_ID
+### AAD_CLIENT_SECRET
+### AAD_DOMAIN
+### AAD_TENANTID
+### AZURE_CREDENTIALS
+### DB_ADMIN_PASSWORD
+### PAT
+Does this still get used?
+### TIMEHELPER_API_SCOPE
 
 
 ## Deploying
