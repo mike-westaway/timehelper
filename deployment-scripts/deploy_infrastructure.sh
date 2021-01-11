@@ -106,7 +106,7 @@ az webapp create \
 
 echo "Updating App Settings for web site $webAppName"
 echo "<h2>Web App Settings:</h2>" >> $output_blob
-az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_WEBCLIENTID AzureAD__ClientSecret=$AAD_WEBCLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=$timehelperApiDefaultScope TimeHelperApiScope=$timehelperApiScope >> $output_blob
+az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_WEBCLIENTID AzureAD__ClientSecret=$AAD_WEBCLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION Api__TimeHelperApiDefaultScope=$timehelperApiDefaultScope Api__TimeHelperApiScope=$timehelperApiScope >> $output_blob
 
 echo "Creating app service for client application $clientAppName in group $resourceGroupName"
 echo "<h1>App Service (Web App): $clientAppName</h1>" >> $output_blob
