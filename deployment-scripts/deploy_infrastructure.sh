@@ -71,7 +71,7 @@ ApplicationInsightsAgent_EXTENSION_VERSION='~2'
 
 echo "Updating App Settings for $webAppName"
 echo "<p>Web App Settings:" >> $output_blob
-az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelper-Api-BaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION >> $output_blob
+az webapp config appsettings set -g $resourceGroupName -n $webAppName --settings Api__TimeHelper-Api-BaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_CLIENTID APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION 
 echo "</p>" >> $output_blob
 if [ "$OUTPUT_LOGGING" = TRUE ]; then
  cat $output_blob
