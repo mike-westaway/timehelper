@@ -9,7 +9,7 @@ TimeHelper is project that explores the possibility of building a quite sophisti
 1. TimeHelper-Client - a native react.js application that enables users to manage and submit their timesheets
 1. TimeHelper-Web - is a utility web site that provides support for testing authenitaction and authorization and simple tests for the api.
 
->> Feel free to just read this site, but if you want to deploy, the best thing its to [fork this repo](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo). Once forked, go to your copy.  Click on actions.  If you are asked click on “I Understand my workflows, go ahead and enable them”. You may need to correct a few things (such as the badges above). 
+> Feel free to just read this site, but if you want to deploy, the best thing its to [fork this repo](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo). Once forked, go to your copy.  Click on actions.  If you are asked click on “I Understand my workflows, go ahead and enable them”. You may need to correct a few things (such as the badges above). 
 
 Time helper is hosted on Azure, and can be deployed automatically (with a single click) using GitHub actions.
 
@@ -104,7 +104,7 @@ Click on actions.  You should see something similar to this:
 
 ![run workflows](/docs/images/run-workflow.png)
 
->> Click 'Run Workflow'
+> Click 'Run Workflow'
 
 You can follow the deployment progress by clicking on the workflow name. 
 
