@@ -13,7 +13,7 @@ env:
   NODE_VERSION: '10.x'
   REACT_APP_AUTHORITY: "https://login.microsoftonline.com/${{ secrets.AAD_TENANTID }}"
   REACT_APP_CLIENT_ID: ${{ secrets.AAD_WEB_CLIENT_ID }}
-  REACT_APP_REDIRECTURI: "${{ github.event.inputs.timehelper_alias }}-client.azurewebsites.net"
+  REACT_APP_REDIRECTURI: "https://${{ github.event.inputs.timehelper_alias }}-client.azurewebsites.net"
   REACT_APP_SERVER_SCOPE: "${{ secrets.TIMEHELPER_API_SCOPE }}.default"
   REACT_APP_SERVER_CALURL : "https://${{ github.event.inputs.timehelper_alias }}-api.azurewebsites.net/api/Calendar/relevant"
  
