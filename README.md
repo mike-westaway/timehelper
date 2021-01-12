@@ -163,7 +163,11 @@ Open the Api url as specified in the job summary.  The Api is documented using S
 
 ### Testing the Web Application
 Open the Web url as specified in the job summary.  
+![web user intterface](docs/images/web.png)
 
+### Testing the Client Application
+Open the Client url as specified in the job summary.  
+![web user intterface](docs/images/client.png)
 
 
 
