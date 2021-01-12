@@ -6,10 +6,7 @@ on:
       timehelper_alias:
         description: 'TimeHelper Alias'     
         required: true
-  push:
-      branches: [ main ]
-      paths:
-        - 'TimeHelper-Web/**'
+  
 env:
    TIMEHELPER_ALIAS: ${{ github.event.inputs.timehelper_alias }}  
 
