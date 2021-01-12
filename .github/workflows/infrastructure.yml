@@ -102,3 +102,13 @@ jobs:
         token: ${{ secrets.PAT }}
         inputs: '{ "timehelper_alias": "${{ env.TIMEHELPER_ALIAS }}" }'  
   
+  job5:
+    name: Job Summary
+    runs-on: ubuntu-latest
+    needs: [job1, job2, job3, job4]
+    steps:
+    - id: step2
+      name: Reply Urls
+      run: |
+        echo "Client App Reply Url: https://$TIMEHELPER_ALIAS-client.azurewebsites.net" 
+        echo "Web App Reply Url: https://$TIMEHELPER_ALIAS-web.azurewebsites.net/signin-oidc" 
