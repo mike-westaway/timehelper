@@ -68,7 +68,7 @@ If your application deployed sucessfully, then a number of Azure resources have 
 
 ** Note above link needs to be authored **
 
-## Running your application
+## Testing your application
 
 It's time to test your application.  There are three main elements to test.  
 
@@ -78,21 +78,5 @@ It's time to test your application.  There are three main elements to test.
 | Web | Test Harness to test authentication and view calendar data | https://<application_alias>-web.azurewebsites.net | Bootstrap format web page |
 | Client | The client that lets you manage your timesheets based on your calendar | https://<application_alias>-client.azurewebsites.net | Rich Internet Application |
 
-The actual urls to use are recorded in the job summary (see above).
-
-### Testing the API
-
-Open the Api url as specified in the job summary.  The Api is documented using Swagger allows you to execture the API operations, but becasue the authentication and authorisation is complex to configure it best to use the web application.  YOu can still read the swagger doumentation and envisage how you could enhance the API.
-
-![swagger api documentation](docs/images/api.png)
-
-### Testing the Web Application
-Open the Web url as specified in the job summary.  
-![web user intterface](docs/images/web.png)
-
-### Testing the Client Application
-Open the Client url as specified in the job summary.  
-![web user intterface](docs/images/client.png)
-
-
+The actual urls to use are recorded in the job summary (see above). If each of the above urls load a page without error then your application is correctly deployed.  
 
