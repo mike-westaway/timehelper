@@ -159,6 +159,8 @@ The actual urls to use are recorded in the job summary (see above).
 
 Open the Api url as specified in the job summary.  The Api is documented using Swagger allows you to execture the API operations, but becasue the authentication and authorisation is complex to configure it best to use the web application.  YOu can still read the swagger doumentation and envisage how you could enhance the API.
 
+![swagger api documentation](docs/images/api.png)
+
 ### Testing the Web Application
 Open the Web url as specified in the job summary.  
 
