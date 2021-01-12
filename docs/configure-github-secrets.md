@@ -3,16 +3,16 @@
 ![configure github secrets](./images/github-secrets.png)
 
 ## AAD_WEB_CLIENT_ID (from AAD configuration)
-This is the client (application id) of the Client AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Web and TimeHelper-Client Azure App services.
+This is the client (application id) of the Client AAD Application configured earlier.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Web and TimeHelper-Client Azure App services.
 
 ## AAD_WEB_CLIENT_SECRET (from AAD configuration)
-This is the client secret the Client AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Web and is the 'password' that allows the Web Application to assume the identity of the Client AAD application (without a secret any application could spoof this and access the Api).
+This is the client secret the Client AAD Application configured earlier.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Web and is the 'password' that allows the Web Application to assume the identity of the Client AAD application (without a secret any application could spoof this and access the Api).
 
 ## AAD_API_CLIENT_ID (from AAD configuration)
-This is the client (application id) of the Api AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Api  Azure App service.
+This is the client (application id) of the Api AAD Application configured earlier.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Api  Azure App service.
 
 ## AAD_API_CLIENT_SECRET (from AAD configuration)
-This is the client secret the Api AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Api and is the 'password' that allows the Api Application to assume the identity of the Api AAD application (without a secret any application could spoof this and access the Graph Api, providing it had valid user token and that user had consented to Api application accessing graph data on their behalf).
+This is the client secret the Api AAD Application configured earlier.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Api and is the 'password' that allows the Api Application to assume the identity of the Api AAD application (without a secret any application could spoof this and access the Graph Api, providing it had valid user token and that user had consented to Api application accessing graph data on their behalf).
 
 ## AAD_DOMAIN
 This is the domain of the AAD tenant that you will be using. it is likely to be your company domain or something like <yourdomain>.onmicrosoft.com. You can specify any valid domain associated with your tenant.  Valid domains can be found by [clicking on the Custom domain names](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Domains) blade in your AAD definition in the Azure portal.
@@ -21,7 +21,7 @@ This is the domain of the AAD tenant that you will be using. it is likely to be 
 This is the tenantid of the AAD tenant that you will be using. This can be found by [on the overview page](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Domains) for your AAD definition in the Azure portal.
 
 ## AZURE_CREDENTIALS
-This is the full json output generated from the [service principal for github actions](https://github.com/nikkh/timehelper/blob/main/README.md#service-principal-for-github-actions) section above.
+This is the full json output generated from the [service principal for github actions](https://github.com/nikkh/timehelper/blob/main/README.md#service-principal-for-github-actions) section.
 
 ## DB_ADMIN_PASSWORD
 The deployment created an Azure SQL Database and populates it with sample data.  This secret is used to set the admin password for your SQL DB.  The DB_ADMIN_USER is defined in the [Infrastructure Deployment Workflow file](https://github.com/nikkh/timehelper/blob/main/.github/workflows/infrastructure.yml).  The default value for that is dbadminuser, but can be overriden in the workflow if you wish.
