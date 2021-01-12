@@ -117,12 +117,6 @@ az webapp create \
   --resource-group $resourceGroupName \
   --runtime  "DOTNETCORE|3.1" >> $output_blob
 
-echo "Updating App Settings for web site $clientAppName"
-echo "<h2>Client App Settings:</h2>" >> $output_blob
-az webapp config appsettings set -g $resourceGroupName -n $clientAppName --settings Api__TimeHelperApiBaseAddress=$timehelperApiBaseUrl ASPNETCORE_ENVIRONMENT=Development AzureAD__Domain=$AAD_DOMAIN AzureAD__TenantId=$AAD_TENANTID AzureAD__ClientId=$AAD_WEBCLIENTID AzureAD__ClientSecret=$AAD_WEBCLIENTSECRET APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING APPINSIGHTS_INSTRUMENTATIONKEY=$APPINSIGHTS_INSTRUMENTATIONKEY ApplicationInsightsAgent_EXTENSION_VERSION=$ApplicationInsightsAgent_EXTENSION_VERSION TimeHelperApiDefaultScope=timehelperApiDefaultScope TimeHelperApiScope=timehelperApiScope >> $output_blob
-echo "<p>we need to change the --runtime option to node or similar</p>"
-echo '<p></p>' >>$output_blob
-
 echo "Creating app service for api application $apiAppName in group $resourceGroupName"
 echo "<h1>App Service (Api App): $apiAppName</h1>" >> $output_blob
 
