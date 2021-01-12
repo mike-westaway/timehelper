@@ -7,10 +7,16 @@ on:
         required: true
   
 env:
-   TIMEHELPER_ALIAS: ${{ github.event.inputs.timehelper_alias }}
-   AZURE_WEBAPP_PACKAGE_PATH: './TimeHelper-Client/build'      
-   NODE_VERSION: '10.x'                
-
+  CI: ""  
+  TIMEHELPER_ALIAS: ${{ github.event.inputs.timehelper_alias }}
+  AZURE_WEBAPP_PACKAGE_PATH: './TimeHelper-Client/build'      
+  NODE_VERSION: '10.x'
+  REACT_APP_AUTHORITY: "https://login.microsoftonline.com/${{ secrets.AAD_TENANTID }}"
+  REACT_APP_CLIENT_ID: ${{ secrets.AAD_WEB_CLIENT_ID }}
+  REACT_APP_REDIRECTURI: "${{ env.TIMEHELPER_ALIAS }}-client.azurewebsites.net"
+  REACT_APP_SERVER_SCOPE: "${{ secrets.TIMEHELPER_API_SCOPE }}.default"
+  REACT_APP_SERVER_CALURL : "https://${{ github.event.inputs.timehelper_alias }}-api.azurewebsites.net/api/Calendar/relevant"
+ 
 jobs:
   job1:
     name: Deploy TimeHelper Client Application
@@ -36,7 +42,7 @@ jobs:
         cd TimeHelper-Client
         ls
         npm install
-        npm run build --if-present
+        ./node_modules/.bin/react-scripts build
         cd build
         ls
         
