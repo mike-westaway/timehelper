@@ -110,7 +110,13 @@ You can follow the deployment progress by clicking on the workflow name.
 
 ![workflow summary](/docs/images/workflow-summary.png)
 
-Click 'Create Time Infrastructure' to see logs.  At any time click on the summary button on the left to return to the overview.  When the job as completed, (hopefully icons are all green) then click on 'Job Summary'.  Make a note of the two reply urls in the log for the job summary. Once you application is deployed you need to make a tweak to the AAD Applications we defined earlier.
+Click 'Create Time Infrastructure' to see logs.  At any time click on the summary button on the left to return to the overview.  
+
+When the job as completed, (hopefully icons are all green) then click on 'Job Summary'.  
+
+Make a note of the two reply urls in the log for the job summary. 
+
+Once your application is deployed you need to make a tweak to the AAD Applications we defined earlier.
 
 1. [App Registrations](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
 1. Select your client application (TimeHelperClient?)
@@ -131,11 +137,28 @@ Congratulations! You should now be ready to run your application!
 
 ## What was deployed?
 
-If you application deployed sucessfully, then a number of Azure resources have been created.  [Learn more about these resources](docs/resources-deployed.md).
+If your application deployed sucessfully, then a number of Azure resources have been created.  [Learn more about these resources](docs/resources-deployed.md).
 
 ** Note above link needs to be authored **
 
 ## Running your application
+
+It's time to test your application.  There are three main elements to test.  
+
+| Component | Description | Url Format | What you should see |
+| ----------- | ----------- | ----------- | ----------- |
+| Api | The Api that accesses calendar data via the graph api | https://<application_alias>-api.azurewebsites.net | Swagger Api documentation |
+| Web | Test Harness to test authentication and view calendar data | https://<application_alias>-web.azurewebsites.net | Bootstrap format web page |
+| Client | The client that lets you manage your timesheets based on your calendar | https://<application_alias>-client.azurewebsites.net | Rich Internet Application |
+
+The actual urls to use are recorded in the job summary (see above).
+
+### Testing the API
+
+Open the Api url as specified in the job summary.  The Api is documented using Swagger allows you to execture the API operations, but becasue the authentication and authorisation is complex to configure it best to use the web application.  YOu can still read the swagger doumentation and envisage how you could enhance the API.
+
+### Testing the Web Application
+Open the Web url as specified in the job summary.  
 
 
 
