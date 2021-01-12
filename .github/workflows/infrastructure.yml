@@ -110,5 +110,13 @@ jobs:
     - id: step2
       name: Reply Urls
       run: |
+        echo 'Use these values to configure your reply urls in you AAD Client Application'
+        echo '---------------------------------------------------------------------------'
         echo "Client App Reply Url: https://$TIMEHELPER_ALIAS-client.azurewebsites.net" 
-        echo "Web App Reply Url: https://$TIMEHELPER_ALIAS-web.azurewebsites.net/signin-oidc" 
+        echo "Web App Reply Url: https://$TIMEHELPER_ALIAS-web.azurewebsites.net/signin-oidc"
+        echo
+        echo 'Use these urls to test your application'
+        echo '---------------------------------------------------------------------------'
+        echo "Api App Url: https://$TIMEHELPER_ALIAS-api.azurewebsites.net/signin-oidc" 
+        echo "Web App Url: https://$TIMEHELPER_ALIAS-web.azurewebsites.net/signin-oidc" 
+        echo "Client App Reply Url: https://$TIMEHELPER_ALIAS-web.azurewebsites.net/signin-oidc" 
