@@ -89,3 +89,16 @@ jobs:
         token: ${{ secrets.PAT }}
         inputs: '{ "timehelper_alias": "${{ env.TIMEHELPER_ALIAS }}" }'  
   
+  job4:
+    name: Client Deployment
+    runs-on: ubuntu-latest
+    needs: [job1]
+    steps:
+    - id: step1
+      name: Initiate Web Site Deployment
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        workflow: TimeHelper Client Deployment
+        token: ${{ secrets.PAT }}
+        inputs: '{ "timehelper_alias": "${{ env.TIMEHELPER_ALIAS }}" }'  
+  
