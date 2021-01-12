@@ -1,4 +1,4 @@
-![Build Time Helper Infrastructure](https://github.com/nikkh/timehelper/workflows/Build%20Time%20Helper%20Infrastructure/badge.svg) ![TimeHelper Web Site Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Web%20Site%20Deployment/badge.svg) ![TimeHelper Api Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Api%20Deployment/badge.svg)
+![Build Time Helper Infrastructure](workflows/Build%20Time%20Helper%20Infrastructure/badge.svg) ![TimeHelper Web Site Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Web%20Site%20Deployment/badge.svg) ![TimeHelper Api Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Api%20Deployment/badge.svg)
 
 # About TimeHelper
 
@@ -8,6 +8,8 @@ TimeHelper is project that explores the possibility of building a quite sophisti
 1. TimeHelper-Api - an api which abstracts the complex authentication and authorization interactions from client applications
 1. TimeHelper-Client - a native react.js application that enables users to manage and submit their timesheets
 1. TimeHelper-Web - is a utility web site that provides support for testing authenitaction and authorization and simple tests for the api.
+
+>> Feel free to just read this site, but if you want to deploy, the best thing its to fork this repo. 
 
 Time helper is hosted on Azure, and can be deployed automatically (with a single click) using GitHub actions.
 
@@ -50,26 +52,26 @@ For instructions see [Configuring the Client AAD Application](docs/configure_cli
 
 ## Preparing to Deploy
 
-Once you have completed your AAD configuration, then we need to store some parameters relating to tht set-up in your GitHub account.  Sensitive data will be stored in GitHub secrets to ensure they are kept private, and are masked in deployment logs, etc. Please see the [GitHub documentation for more information on managing secrets](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets).
+Once you have completed your AAD configuration, then we need to store some parameters relating to tht set-up in your GitHub account.  Sensitive data will be stored in GitHub secrets to ensure they are kept private, and are masked in deployment logs, etc. Please see the [GitHub documentation for more information on managing secrets](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets).  We noted the data items we need to store in secrets as we did our AAD configuration: you'll need those notes now.
 
-The secrets that need to be configured are described in the following sections:
+Configure GitHub secrets as described in the following sections:
 
-### AAD_WEB_CLIENT_ID
+### AAD_WEB_CLIENT_ID (from AAD configuration)
 This is the client (application id) of the Client AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Web and TimeHelper-Client Azure App services.
 
-### AAD_WEB_CLIENT_SECRET
+### AAD_WEB_CLIENT_SECRET (from AAD configuration)
 This is the client secret the Client AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Web and is the 'password' that allows the Web Application to assume the identity of the Client AAD application (without a secret any application could spoof this and access the Api).
 
-### AAD_API_CLIENT_ID
+### AAD_API_CLIENT_ID (from AAD configuration)
 This is the client (application id) of the Api AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Api  Azure App service.
 
-### AAD_API_CLIENT_SECRET
+### AAD_API_CLIENT_SECRET (from AAD configuration)
 This is the client secret the Api AAD Application configured above.  This id will be propogated by the GitHub actions into the configuration for the TimeHelper-Api and is the 'password' that allows the Api Application to assume the identity of the Api AAD application (without a secret any application could spoof this and access the Graph Api, providing it had valid user token and that user had consented to Api application accessing graph data on their behalf).
 
 ### AAD_DOMAIN
 This is the domain of the AAD tenant that you will be using. it is likely to be your company domain or something like <yourdomain>.onmicrosoft.com. You can specify any valid domain associated with your tenant.  Valid domains can be found by [clicking on the Custom domain names](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Domains) blade in your AAD definition in the Azure portal.
 
-### AAD_TENANTID
+### AAD_TENANTID (from AAD configuration)
 This is the tenantid of the AAD tenant that you will be using. This can be found by [on the overview page](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Domains) for your AAD definition in the Azure portal.
 
 ### AZURE_CREDENTIALS
@@ -81,9 +83,12 @@ The deployment created an Azure SQL Database and populates it with sample data. 
 ### PAT
 This is a Personal Access Token to allow the GitHub actions to access your repo.  This is needed to enable the main infrastructure deployment workflow to kick off deployments of the applications once it has completed normally.  Follow the instructions for [creating a GitHub PAT](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token#:~:text=Creating%20a%20token.%201%20Verify%20your%20email%20address%2C,able%20to%20see%20the%20token%20again.%20More%20items) and then store the value of the generated PAT as a secret.
 
-### TIMEHELPER_API_SCOPE
-
+### TIMEHELPER_API_SCOPE (from AAD configuration)
+This is the scope exposed by our API application.  Our client will need to specify it on caling the API.  The client applications as part of this solution recall this value from configuratin, so by adding it to a GitHub secret we can make the correct value available in our application configurations as part of the automated deployments.
 
 ## Deploying
+It's now time to deploy your application.  This is the fun part - you'll get to go and get a coffee!.
+
+
 ## Testing your Deployment
 
