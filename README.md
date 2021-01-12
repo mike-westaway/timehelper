@@ -1,4 +1,4 @@
-![Build Time Helper Infrastructure](workflows/Build%20Time%20Helper%20Infrastructure/badge.svg) ![TimeHelper Web Site Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Web%20Site%20Deployment/badge.svg) ![TimeHelper Api Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Api%20Deployment/badge.svg)
+![Build Time Helper Infrastructure](https://github.com/nikkh/timehelper/workflows/Build%20Time%20Helper%20Infrastructure/badge.svg) ![TimeHelper Web Site Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Web%20Site%20Deployment/badge.svg) ![TimeHelper Api Deployment](https://github.com/nikkh/timehelper/workflows/TimeHelper%20Api%20Deployment/badge.svg)
 
 # About TimeHelper
 
@@ -9,7 +9,7 @@ TimeHelper is project that explores the possibility of building a quite sophisti
 1. TimeHelper-Client - a native react.js application that enables users to manage and submit their timesheets
 1. TimeHelper-Web - is a utility web site that provides support for testing authenitaction and authorization and simple tests for the api.
 
->> Feel free to just read this site, but if you want to deploy, the best thing its to fork this repo. 
+>> Feel free to just read this site, but if you want to deploy, the best thing its to [fork this repo](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo). Once forked, go to your copy.  Click on actions.  If you are asked click on “I Understand my workflows, go ahead and enable them”. You may need to correct a few things (such as the badges above). 
 
 Time helper is hosted on Azure, and can be deployed automatically (with a single click) using GitHub actions.
 
@@ -89,6 +89,54 @@ This is the scope exposed by our API application.  Our client will need to speci
 ## Deploying
 It's now time to deploy your application.  This is the fun part - you'll get to go and get a coffee!.
 
+Click on actions.  You should see something similar to this:
 
-## Testing your Deployment
+![GitHub actions](/docs/images/github-actions.png)
+
+1. Click on 'Build TimeHelper Infrastructure'
+1. Towards the right of the screen choose 'Run Workflow'
+1. On the pop-up screen that appears configure your deployment:
+
+- [ ] location can be any valid azure location (e.g. uksouth, ukwest, northeurope)
+- [ ] instance name is just a tag that makes it easier to find your resources, you can choose anything you like
+- [ ] pending delete wont do anything for you - set it to false
+- [ ] The most important value is 'Application alias'.  This is used to prefix Azure resource names (including storage accounts) so choose a prefix which is around 5 characters alphanumeric (something like nick1).
+
+![run workflows](/docs/images/run-workflow.png)
+
+>> Click 'Run Workflow'
+
+You can follow the deployment progress by clicking on the workflow name. 
+
+![workflow summary](/docs/images/workflow-summary.png)
+
+Click 'Create Time Infrastructure' to see logs.  At any time click on the summary button on the left to return to the overview.  When the job as completed, (hopefully icons are all green) then click on 'Job Summary'.  Make a note of the two reply urls in the log for the job summary. Once you application is deployed you need to make a tweak to the AAD Applications we defined earlier.
+
+1. [App Registrations](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
+1. Select your client application (TimeHelperClient?)
+1. Click on 'Authentication'
+1. Click '+ Add a platfrom'
+1. Choose 'Web'
+1. Where it says 'Enter the redirect uri of the application' enter the 'Web App Reply Url' from the Job Summary that you noted earlier.
+1. Select 'ID Tokens'
+1. Click 'Configure'
+1. Click '+ Add a platform'
+1. Click 'Single-page application'
+1. Where it says 'Enter the redirect uri of the application' enter the 'Client App Reply Url' from the Job Summary that you noted earlier.
+1. Click 'Configure'
+
+![TimeHelper client authentication configuration](docs/images/timehelperclient-authentication.png)
+
+Congratulations! You should now be ready to run your application!
+
+## What was deployed?
+
+If you application deployed sucessfully, then a number of Azure resources have been created.  [Learn more about these resources](docs/resources-deployed.md).
+
+** Note above link needs to be authored **
+
+## Running your application
+
+
+
 
