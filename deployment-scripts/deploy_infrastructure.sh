@@ -38,6 +38,7 @@ resourceGroupName="${applicationName}-rg"
 timehelperApiBaseUrl="https://${applicationName}-api.azurewebsites.net/"
 timehelperApiDefaultScope="${TIMEHELPER_API_SCOPE}.default"
 timehelperApiScope="${TIMEHELPER_API_SCOPE}access_as_user"
+clientAppBaseUrl="https://${applicationName}-client.azurewebsites.net/"
 swaggerTermsUri="https://${webAppName}.azurewebsites.net/Home/Terms"
 echo ---Derived Variables
 echo "Application Name: $applicationName"
@@ -133,6 +134,10 @@ az webapp config appsettings set -g $resourceGroupName -n $apiAppName --settings
 echo "<h2>Api App Connection Strings:</h2>" >> $output_blob
 echo "Updating Connection Strings for api app $apiAppName"
 az webapp config connection-string set -g $resourceGroupName -n $apiAppName -t SQLAzure --settings "TimeHelperDataContext=$sqlConnectionString" >> $output_blob
+
+echo "<h2>Api App Cors Policy:</h2>" >> $output_blob
+echo "Updating Cors Policy for api app $apiAppName"
+az webapp cors add -g $resourceGroupName -n $apiAppName --allowed-origins $clientAppBaseUrl
 
 echo '</body></html>' >> $output_blob
 
