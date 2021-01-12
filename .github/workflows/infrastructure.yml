@@ -95,7 +95,7 @@ jobs:
     needs: [job1]
     steps:
     - id: step1
-      name: Initiate Web Site Deployment
+      name: Initiate Client Deployment
       uses: benc-uk/workflow-dispatch@v1
       with:
         workflow: TimeHelper Client Deployment
