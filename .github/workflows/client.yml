@@ -1,0 +1,48 @@
+name: TimeHelper Client Deployment
+on: 
+  workflow_dispatch:
+    inputs:
+      timehelper_alias:
+        description: 'TimeHelper Alias'     
+        required: true
+  
+env:
+   TIMEHELPER_ALIAS: ${{ github.event.inputs.timehelper_alias }}
+   AZURE_WEBAPP_PACKAGE_PATH: './TimeHelper-Client/build'      
+   NODE_VERSION: '10.x'                
+
+jobs:
+  job1:
+    name: Deploy TimeHelper Client Application
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - id: step1
+      name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    
+
+    - id: step2
+      name: npm install, build, and test
+      run: |
+        # Build and test the project, then
+        # deploy to Azure Web App.
+        cd TimeHelper-Client
+        ls
+        npm install
+        npm run build --if-present
+        cd build
+        ls
+        
+    - id: step3
+      name: 'Deploy TimeHelper Web to App Service'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: ${{env.TIMEHELPER_ALIAS}}-client
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
