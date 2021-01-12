@@ -53,4 +53,4 @@ We can now go back and provie some information we didn't know when we created ou
 ![screenshot manifest](./images/manifest-known-applications.png)
 
 
-That's the Client Application defined.  [Continue with prepare to deploy ](../timehelper#preparing-to-deploy).
+That's the Client Application defined.  [Continue with prepare to deploy ](https://github.com/nikkh/timehelper#preparing-to-deploy).
