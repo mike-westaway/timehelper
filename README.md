@@ -66,8 +66,6 @@ Make a note of the two reply urls in the log for the job summary and [add the ne
 
 If your application deployed sucessfully, then a number of Azure resources have been created.  [Learn more about these resources](docs/resources-deployed.md).
 
-** Note above link needs to be authored **
-
 ## Testing your application
 
 It's time to test your application.  There are three main elements to test.  
