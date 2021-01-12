@@ -114,6 +114,8 @@ Click 'Create Time Infrastructure' to see logs.  At any time click on the summar
 
 When the job as completed, (hopefully icons are all green) then click on 'Job Summary'.  
 
+![job summary](/docs/images/job-summary.png)
+
 Make a note of the two reply urls in the log for the job summary. 
 
 Once your application is deployed you need to make a tweak to the AAD Applications we defined earlier.
