@@ -54,7 +54,7 @@ For instructions see [Configuring the Client AAD Application](docs/configure_cli
 
 Once you have completed your AAD configuration, then we need to store some parameters relating to tht set-up in your GitHub account.  Sensitive data will be stored in GitHub secrets to ensure they are kept private, and are masked in deployment logs, etc. Please see the [GitHub documentation for more information on managing secrets](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets).  We noted the data items we need to store in secrets as we did our AAD configuration: you'll need those notes now.
 
-Configure GitHub secrets as described in the [Configure GitHub Secrets](docs/configure_github_secrets.md).
+Configure GitHub secrets as described in the [Configure GitHub Secrets](docs/configure-github-secrets.md).
 
 
 ## Deploying
