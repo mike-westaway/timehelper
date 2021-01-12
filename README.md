@@ -68,45 +68,22 @@ Click on actions.  You should see something similar to this:
 1. Towards the right of the screen choose 'Run Workflow'
 1. On the pop-up screen that appears configure your deployment:
 
-- [ ] location can be any valid azure location (e.g. uksouth, ukwest, northeurope)
-- [ ] instance name is just a tag that makes it easier to find your resources, you can choose anything you like
-- [ ] pending delete wont do anything for you - set it to false
-- [ ] The most important value is 'Application alias'.  This is used to prefix Azure resource names (including storage accounts) so choose a prefix which is around 5 characters alphanumeric (something like nick1).
-
 ![run workflows](/docs/images/run-workflow.png)
+
+Fill out the parameters as follows:
+
+- location can be any valid azure location (e.g. uksouth, ukwest, northeurope)
+- instance name is just a tag that makes it easier to find your resources, you can choose anything you like
+- pending delete wont do anything for you - set it to false
+- The most important value is 'Application alias'.  This is used to prefix Azure resource names (including storage accounts) so choose a prefix which is around 5 characters alphanumeric (something like nick1).
 
 > Click 'Run Workflow'
 
-You can follow the deployment progress by clicking on the workflow name. 
-
-![workflow summary](/docs/images/workflow-summary.png)
-
-Click 'Create Time Infrastructure' to see logs.  At any time click on the summary button on the left to return to the overview.  
-
-When the job as completed, (hopefully icons are all green) then click on 'Job Summary'.  
+You can follow the deployment progress by clicking on the workflow name. When the job as completed, (hopefully icons are all green) then click on 'Job Summary'.  
 
 ![job summary](/docs/images/job-summary.png)
 
-Make a note of the two reply urls in the log for the job summary. 
-
-Once your application is deployed you need to make a tweak to the AAD Applications we defined earlier.
-
-1. [App Registrations](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
-1. Select your client application (TimeHelperClient?)
-1. Click on 'Authentication'
-1. Click '+ Add a platfrom'
-1. Choose 'Web'
-1. Where it says 'Enter the redirect uri of the application' enter the 'Web App Reply Url' from the Job Summary that you noted earlier.
-1. Select 'ID Tokens'
-1. Click 'Configure'
-1. Click '+ Add a platform'
-1. Click 'Single-page application'
-1. Where it says 'Enter the redirect uri of the application' enter the 'Client App Reply Url' from the Job Summary that you noted earlier.
-1. Click 'Configure'
-
-![TimeHelper client authentication configuration](docs/images/timehelperclient-authentication.png)
-
-Congratulations! You should now be ready to run your application!
+Make a note of the two reply urls in the log for the job summary and [add the newly generated reply urls to AAD Applications](docs/add-reply-urls.md).
 
 ## What was deployed?
 
