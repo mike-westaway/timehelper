@@ -73,10 +73,14 @@ This is the domain of the AAD tenant that you will be using. it is likely to be 
 This is the tenantid of the AAD tenant that you will be using. This can be found by [on the overview page](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Domains) for your AAD definition in the Azure portal.
 
 ### AZURE_CREDENTIALS
+This is the full json output generated from the [service principal for github actions](https://github.com/nikkh/timehelper/blob/main/README.md#service-principal-for-github-actions) section above.
 
 ### DB_ADMIN_PASSWORD
+The deployment created an Azure SQL Database and populates it with sample data.  This secret is used to set the admin password for your SQL DB.  The DB_ADMIN_USER is defined in the [Infrastructure Deployment Workflow file](https://github.com/nikkh/timehelper/blob/main/.github/workflows/infrastructure.yml).  The default value for that is dbadminuser, but can be overriden in the workflow if you wish.
+
 ### PAT
-Does this still get used?
+This is a Personal Access Token to allow the GitHub actions to access your repo.  This is needed to enable the main infrastructure deployment workflow to kick off deployments of the applications once it has completed normally.  Follow the instructions for [creating a GitHub PAT](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token#:~:text=Creating%20a%20token.%201%20Verify%20your%20email%20address%2C,able%20to%20see%20the%20token%20again.%20More%20items) and then store the value of the generated PAT as a secret.
+
 ### TIMEHELPER_API_SCOPE
 
 
