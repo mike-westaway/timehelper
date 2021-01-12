@@ -26,6 +26,12 @@ AAD configuration should be carried out very carefully.  If you have problems in
 These elements are described in detail in the following sections:
 
 ### Service Principal for GitHub Actions
+The actions in this repo create all the resources necessary to run the TimeHelper application in a new resource group in one of your subscription.  In order to do that we need Azure credentials with contributor rights to the subscription where you will host. Run the following command in Azure CLI and copy the resultant json output to your clipboard
+
+`az ad sp create-for-rbac --name "myApp" --role contributor --scopes /subscriptions/{subscription-id} --sdk-auth`
+
+Then create GitHub secret called AZURE_CREDENTIALS and paste the json content generated above into the value foeld for the secret. [see here for more details](https://github.com/Azure/login#configure-deployment-credentials)
+
 ### Client AAD Application
 ### Api AAD Application
 
