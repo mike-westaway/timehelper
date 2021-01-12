@@ -1,0 +1,7 @@
+# Example Timesheet app
+
+REACT_APP_AUTHORITY="<aad>" 
+REACT_APP_CLIENT_ID="<aad>" 
+REACT_APP_REDIRECTURI="<aad>"
+REACT_APP_SERVER_SCOPE="<aad>"
+REACT_APP_SERVER_CALURL="<aad>"
