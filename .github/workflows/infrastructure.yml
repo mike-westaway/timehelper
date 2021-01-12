@@ -119,4 +119,4 @@ jobs:
         echo '---------------------------------------------------------------------------'
         echo "Api App Url: https://$TIMEHELPER_ALIAS-api.azurewebsites.net/" 
         echo "Web App Url: https://$TIMEHELPER_ALIAS-web.azurewebsites.net/" 
-        echo "Client App Url: https://$TIMEHELPER_ALIAS-web.azurewebsites.net/" 
+        echo "Client App Url: https://$TIMEHELPER_ALIAS-cclient.azurewebsites.net/" 
