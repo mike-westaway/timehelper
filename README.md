@@ -37,7 +37,7 @@ The Api AAD Application represents the identity of the api applications in the T
 
 The application also exposes permissions.  The client AAD Application (below) will be authorised to use the Api AAD Application and therefore only authenticated and authorized client applications can use this Api.
 
-For instructions see [Configuring the Api AAD Application](configure_api_app.md).
+For instructions see [Configuring the Api AAD Application](docs/configure_api_app.md).
 
 ### Client AAD Application
 The Client AAD Application represents the identity of the client applications in the TimeHelper solution.  Configuration in these applications points to this AAD application which is then used to represent the client applications in scenarios for authentication, consent and authorization.
@@ -46,7 +46,7 @@ The client application holds valid parameters for authentication.  For example, 
 
 The client application has permissions to use the Api Application, so clients need to assume the identity of this application before that can access the Api (and consequently the Microsoft Graph to read (for example) calendar information.
 
-For instructions see [Configuring the Client AAD Application](configure_client_app.md).
+For instructions see [Configuring the Client AAD Application](docs/configure_client_app.md).
 
 ## Preparing to Deploy
 
