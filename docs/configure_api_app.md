@@ -60,4 +60,4 @@ The Api permissions were private to our Api Application.  Now we need to expose 
 
 That's the Api Application defined.  We will come back to it later, but we need to configure a value that we dont yet know, so we'll come back when we do.
 
-
+[Carry on to configure the client AAD Application ](./configure_client_app.md)
