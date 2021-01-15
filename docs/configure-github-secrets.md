@@ -29,5 +29,7 @@ The deployment created an Azure SQL Database and populates it with sample data. 
 ## PAT
 This is a Personal Access Token to allow the GitHub actions to access your repo.  This is needed to enable the main infrastructure deployment workflow to kick off deployments of the applications once it has completed normally.  Follow the instructions for [creating a GitHub PAT](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token#:~:text=Creating%20a%20token.%201%20Verify%20your%20email%20address%2C,able%20to%20see%20the%20token%20again.%20More%20items) and then store the value of the generated PAT as a secret.
 
+> I dont think you actually need this.  I think instead you can directly reference ${{ secrets.GITHUB_TOKEN }} but I didn't have time to test it yet.
+
 ## TIMEHELPER_API_SCOPE (from AAD configuration)
 This is the scope exposed by our API application.  Our client will need to specify it on caling the API.  The client applications as part of this solution recall this value from configuratin, so by adding it to a GitHub secret we can make the correct value available in our application configurations as part of the automated deployments.
