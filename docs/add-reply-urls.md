@@ -15,6 +15,6 @@ Once your application is deployed you need to make a tweak to the AAD Client App
 1. Where it says 'Enter the redirect uri of the application' enter the 'Client App Reply Url' from the Job Summary that you noted earlier.
 1. Click 'Configure'
 
-![TimeHelper client authentication configuration](docs/images/timehelperclient-authentication.png)
+![TimeHelper client authentication configuration](images/timehelperclient-authentication.png)
 
 Congratulations! You should now be ready to run your application!
