@@ -32,4 +32,4 @@ This is a Personal Access Token to allow the GitHub actions to access your repo.
 > I dont think you actually need this.  I think instead you can directly reference ${{ secrets.GITHUB_TOKEN }} but I didn't have time to test it yet.
 
 ## TIMEHELPER_API_SCOPE (from AAD configuration)
-This is the scope exposed by our API application.  Our client will need to specify it on caling the API.  The client applications as part of this solution recall this value from configuratin, so by adding it to a GitHub secret we can make the correct value available in our application configurations as part of the automated deployments.
+This is the scope exposed by our API application.  Our client will need to specify it on caling the API.  The client applications as part of this solution recall this value from configuration, so by adding it to a GitHub secret we can make the correct value available in our application configurations as part of the automated deployments.
