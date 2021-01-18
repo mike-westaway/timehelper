@@ -12,7 +12,7 @@ Choose the '+ new registration' button at the top of the screen.
 1. Choose 'Accounts in this organizational directory only'.  There's no reason why the other options wouldnt work - but I havent tested them.
 1. Choose 'Register'
 
-This has created a shell application without much detail.  We'll fill in the detail shortly, but for now make a note of some items.  We're going to save some deta in GitHub secrets, so I'll use the secret names here to make it easier:
+This has created a shell application without much detail.  We'll fill in the detail shortly, but for now make a note of some items.  We're going to save some data in GitHub secrets, so I'll use the secret names here to make it easier:
 
 >AAD_API_CLIENT_ID = Application (client) ID
 
@@ -20,7 +20,7 @@ This has created a shell application without much detail.  We'll fill in the det
 
 ## Creating a secret
 
-Next we need to generate a secret.  Choose 'Certificates & secrets' from the left nav. Under 'Client secrets' click '+ New client secret'.  Give it a name (main would work), and leave expiry at 1 year.  Click 'Add'. You will see that a new secret value is generated an made available to copy in the value column.  Copy the value (if you navigate away before copying, yo'll need to repeat the process).
+Next we need to generate a secret.  Choose 'Certificates & secrets' from the left nav. Under 'Client secrets' click '+ New client secret'.  Give it a name (main would work), and leave expiry at 1 year.  Click 'Add'. You will see that a new secret value is generated and made available to copy in the value column.  Copy the value (if you navigate away before copying, you'll need to repeat the process).
 
 >AAD_API_CLIENT_SECRET = the value you just copied
 
@@ -34,7 +34,7 @@ Our api application will need to access the Microsoft Graph to retrieve calendar
 1. In the 'Request API Permissions' window that opens choose 'Microsoft Graph'
 1. Choose 'Delegated permissions'.  This means that the api application itself cannot access the users data via the graph api, but if the user consents to this, and valid user credentials are presented to the api application, then the api application will be able to access data *for that user only*.
 1. Open the 'Calendars' group (you may need to scroll).
-1. Choose Calendard.Read and Calendars.ReadWrite (TimeHelper doesnt use the latter, but you could amend it so it writes notes into the calendar, and then it would need this).
+1. Choose Calendard.Read and Calendars.ReadWrite (TimeHelper doesn't use the latter, but you could amend it so it writes notes into the calendar, and then it would need this).
 1. Click 'Add permissions'
 
 You're Api permissions should look like this:
@@ -43,7 +43,7 @@ You're Api permissions should look like this:
 
 ## Expose an Api
 
-The Api permissions were private to our Api Application.  Now we need to expose an Api for our clients to use (if they are auhtorised).  
+The Api permissions were private to our Api Application.  Now we need to expose an Api for our clients to use (if they are authorised).  
 
 1. In the left nav, click 'Expose an API'
 1. In the centre of the screen click '+ Add a scope'
