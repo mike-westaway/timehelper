@@ -1,6 +1,6 @@
 # Configure AAD Applications
 
-USe the azure portal or CLI to carry out the following AAD configuration:
+Use the azure portal or CLI to carry out the following AAD configuration:
 
 ## Service Principal for GitHub Actions
 The actions in this repo create all the resources necessary to run the TimeHelper application in a new resource group in one of your subscription.  In order to do that we need Azure credentials with contributor rights to the subscription where you will host. Run the following command in Azure CLI and copy the resultant json output to your clipboard
