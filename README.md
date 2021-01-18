@@ -76,5 +76,7 @@ It's time to test your application.  There are three main elements to test.
 | Web | Test Harness to test authentication and view calendar data | https://<application_alias>-web.azurewebsites.net | Bootstrap format web page |
 | Client | The client that lets you manage your timesheets based on your calendar | https://<application_alias>-client.azurewebsites.net | Rich Internet Application |
 
-The actual urls to use are recorded in the job summary (see above). If each of the above urls load a page without error then your application is correctly deployed.  
+The actual urls to use are recorded in the job summary (see above). If each of the above urls load a page without error then your application is correctly deployed.  The first time you logon you will be asked to provide consent for the application to access your calendar entries on you behalf:
+
+![consent screenshot](/docs/images/consent.png)
 
