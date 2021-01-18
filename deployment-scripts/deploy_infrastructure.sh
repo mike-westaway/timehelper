@@ -69,10 +69,12 @@ echo "storageConnectionString=$storageConnectionString" >> $output_blob
 export AZURE_STORAGE_CONNECTION_STRING="$storageConnectionString" 
 dummyDataContainerName='timehelper-dummy-data'
 az storage container create -n "logs" --public-access off >> $output_blob
-az storage container create -n $dummyDataContainerName --public-access off >> $output_blob
+az storage container create -n $dummyDataContainerName --public-access blob >> $output_blob
 az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.dummy.json' -n 'keith2@nikkh.net.dummy.json' >> $output_blob
 echo "Uploaded 'keith2@nikkh.net.dummy.json' to container $dummyDataContainerName in storage account $storageAccountName"
-dummyDataContainer="$(az storage account show -n $storageAccountName -g $resourceGroupName  --query primaryEndpoints.blob -o tsv)$dummyDataContainerName"
+az storage blob upload -c $dummyDataContainerName -f './keith2@nikkh.net.relevant.json' -n 'keith2@nikkh.net.relevant.json' >> $output_blob
+echo "Uploaded 'keith2@nikkh.net.relevant.json' to container $dummyDataContainerName in storage account $storageAccountName"
+dummyDataContainer="$(az storage account show -n $storageAccountName -g $resourceGroupName  --query primaryEndpoints.blob -o tsv)$dummyDataContainerName/"
 
 echo "Creating Azure Sql Resources in $TIMEHELPER_LOCATION"
 echo "<h1>Azure Sql Server: $dbServerName</h1>" >> $output_blob
