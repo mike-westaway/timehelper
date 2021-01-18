@@ -37,7 +37,7 @@ You're Api permissions should look like this:
 
 ## Tell our Api Application about our client
 
-We can now go back and provie some information we didn't know when we created our Api Application.  That's the Client Id of the client application that will be using it. (This knowledge allows the Microsoft Authentication Libraries (used in the TimeHelper solution) to know what permissions our Api Requires.  This enables our client app to request permisisons from the user on behalf of the Api App.
+We can now go back and provide some information we didn't know when we created our Api Application.  That's the Client Id of the client application that will be using it. (This knowledge allows the Microsoft Authentication Libraries (used in the TimeHelper solution) to know what permissions our Api Requires.  This enables our client app to request permisisons from the user on behalf of the Api App.
 
 1. Navigate back to our [App registrations](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
 1. Choose TimeHelperApi (or whatever you called it)
