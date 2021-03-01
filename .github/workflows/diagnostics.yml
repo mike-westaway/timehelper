@@ -44,3 +44,9 @@ jobs:
         with:
           name: diagnostics
           path: diagnostics.txt
+
+      - name: Download
+        uses: actions/download-artifact@v2
+        with: 
+          name: diagnostics
+          
