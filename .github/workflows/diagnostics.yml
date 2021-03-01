@@ -32,9 +32,15 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo "Examine secrets.."
-          echo "Secret AAD_API_CLIENT_ID=${{ secrets.AAD_API_CLIENT_ID }}"
-          echo "Secret AAD_DOMAIN=${{ secrets.AAD_DOMAIN }}"
-          echo "Secret AAD_TENANTID=${{ secrets.AAD_TENANTID }}"
-          echo "Secret AAD_WEB_CLIENT_ID=${{ secrets.AAD_WEB_CLIENT_ID }}"
-          echo "Secret TIMEHELPER_API_SCOPE=${{ secrets.TIMEHELPER_API_SCOPE }}"
+          echo "Examine secrets.." > diagnostics.txt
+          echo "Secret AAD_API_CLIENT_ID=${{ secrets.AAD_API_CLIENT_ID }}" >> diagnostics.txt
+          echo "Secret AAD_DOMAIN=${{ secrets.AAD_DOMAIN }}" >> diagnostics.txt
+          echo "Secret AAD_TENANTID=${{ secrets.AAD_TENANTID }}" >> diagnostics.txt
+          echo "Secret AAD_WEB_CLIENT_ID=${{ secrets.AAD_WEB_CLIENT_ID }}" >> diagnostics.txt
+          echo "Secret TIMEHELPER_API_SCOPE=${{ secrets.TIMEHELPER_API_SCOPE }}" >> diagnostics.txt
+          
+      - name: Upload file for job 1
+        uses: actions/upload-artifact@v2
+        with:
+          name: diagnostics
+          path: diagnostics.txt
